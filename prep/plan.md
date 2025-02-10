@@ -1,8 +1,7 @@
-
 # Plan
 
-## Tool: 
-## Product: 
+## Tool: Phaser (Nancy Chen) & Earsketch (Simran Sayeed)
+## Product: Music Game
 
 ---
 
@@ -10,14 +9,34 @@
 
 #### MVP
 
-- [ ] Task (deadline: X)
-  - [ ] Subtask (deadline: X)
+(February 15-23)
+- []
+  - [] Subtask
+- []
+
+(February 24-March 2)
+- []
+
+(March 3-9)
+- []
+
+(March 10-16)
+- []
+
+(March 17-23)
+- []
+
+(March 24-31)
+- []
 
 #### Beyond MVP
 
-- [ ] Task
-  - [ ] Subtask
+(April 1-12)
+- [] make the game 3D
 
+(April 13-20)
+- [] check through any bugs in code
+- [] finish up any codes
 
 <!-- EXAMPLE
 
