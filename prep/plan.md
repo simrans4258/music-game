@@ -30,12 +30,12 @@
 #### Beyond MVP
 
 (April 1-12)
-- [] make the game 3D
-- [] draw out sprites/backgrounds if we have enough time
+- [] make the game 3D (Nancy & Simran)
+- [] draw out sprites/backgrounds if we have enough time (Nancy & Simran)
 
 (April 13-20)
-- [] check through any bugs in code
-- [] finish up any codes
+- [] check through any bugs in code (Nancy & Simran)
+- [] finish up any codes (Nancy & Simran)
 
 <!-- EXAMPLE
 
