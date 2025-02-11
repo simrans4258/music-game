@@ -1,7 +1,7 @@
 # Plan
 
 ## Tool: Phaser (Nancy Chen) & Earsketch (Simran Sayeed)
-## Product: Music Game
+## Product: Music Game (name: Harmony Quest)
 
 ---
 
@@ -10,9 +10,11 @@
 #### MVP
 
 (February 15-23)-(break)
-- []
-  - [] Subtask
-- []
+- [] start off coding with a welcome screen/alert of some sorts using javascript
+  - [] code the alert signal to welcome user (Simran)
+  - [] write out the instructions for the game on the screen (Nancy)
+- [] make a button that leads to actual game, and the game shows up for the user to play
+- [] input backgrounds/sprites/images into the game
 
 (February 24-March 2)
 - []
@@ -33,6 +35,7 @@
 
 (April 1-12)
 - [] make the game 3D
+- [] draw out sprites/backgrounds if we have enough time
 
 (April 13-20)
 - [] check through any bugs in code
