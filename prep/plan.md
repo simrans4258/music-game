@@ -1,7 +1,7 @@
 # Plan
 
 ## Tool: Phaser (Nancy Chen) & Earsketch (Simran Sayeed)
-## Product: Music Game (name: Harmony Quest)
+## Product: Music Game (Name: Harmony Quest)
 
 ---
 
@@ -13,23 +13,19 @@
 - [] start off coding with a welcome screen/alert of some sorts using javascript
   - [] code the alert signal to welcome user (Simran)
   - [] write out the instructions for the game on the screen (Nancy)
-- [] make a button that leads to actual game, and the game shows up for the user to play
-- [] input backgrounds/sprites/images into the game
+- [] make a button that leads to actual game, and the game shows up for the user to play (Simran)
+- [] input backgrounds/sprites/images into the game (Nancy)
 
-(February 24-March 2)
-- []
+(February 24-March 9)
+- [] making javascript commands for buttons (Nancy)
+- [] figuring out how to correlate the audio with the buttons (Nancy & Simran)
 
-(March 3-9)
-- []
-
-(March 10-16)
-- []
-
-(March 17-23)
-- []
+(March 10-23)
+- [] create math questions (obstacles for the game), if the answer is correct, obstacle is removed (Nancy & Simran)
+- [] when user misses a certain amount of beats, game over (Simran)
 
 (March 24-31)
-- []
+- [] give an alert to the player that "game is over" and make a button to back home to play again (Nancy & Simran)
 
 #### Beyond MVP
 
