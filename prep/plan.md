@@ -12,9 +12,9 @@
 (February 15-23)-(break)
 - [] start off coding with a welcome screen/alert of some sorts using javascript
   - [x] code the alert signal to welcome user (Simran)
-  - [] write out the instructions for the game on the screen (Simran & Nancy)
+  - [x] write out the instructions for the game on the screen (Simran & Nancy)
 - [x] make a button that leads to actual game, and the game shows up for the user to play (Nancy)
-- [] input backgrounds/sprites/images into the game (Nancy)
+- [x] input backgrounds/sprites/images into the game (Nancy)
 
 (February 24-March 9)
 - [] making javascript commands for buttons (Nancy)
