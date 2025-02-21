@@ -26,16 +26,8 @@ function create() {
     button.setScale(0.1); // Adjust scale as needed
 
     // Instructions (Hidden Initially)
-    let instructionText = this.add.text(190, 250,
-        "Instructions:\n- \n Use arrow keys to move \n Press SPACE to jump!",
-Paste the instructions here:
-- use arrow keys to move
-- use SPACE bar to jump
-- match your commands to the beat of the music
-- solve math problems to avoid obstacles
-- if you miss a beat/obstacle, its game over
-- get through all the obstacles and match the beats to win the game!
-        { fontSize: '20px', fontWeight: 'bold', fill: '#000000', align: 'center' }
+    let instructionText = this.add.text(170, 220, "Instructions:\n Use arrow keys to move \n Use SPACE bar to jump \n Match your commands to the \n beat of the music \n Solve math problems \n to avoid obstacles \n If you miss a beat/obstacle, \n it is game over \n Get through all the obstacles and \n match the beats to win the game!",
+        { fontSize: '15px', fontWeight: 'bold', fill: '#000000', align: 'center' }
     ).setAlpha(0); // Set to invisible initially
 
     // Button Click Event
