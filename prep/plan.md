@@ -37,6 +37,14 @@
 - [] check through any bugs in code (Nancy & Simran)
 - [] finish up any codes (Nancy & Simran)
 
+#### Instructions for game
+- use arrow keys to move
+- use SPACE bar to jump
+- match your commands to the beat of the music
+- solve math problems to avoid obstacles
+- if you miss a beat/obstacle, its game over
+- get through all the obstacles and match the beats to win the game!
+
 <!-- EXAMPLE
 
 ## Tool: APIs
