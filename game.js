@@ -28,7 +28,13 @@ function create() {
     // Instructions (Hidden Initially)
     let instructionText = this.add.text(190, 250,
         "Instructions:\n- \n Use arrow keys to move \n Press SPACE to jump!",
-Paste the instructions here: 
+Paste the instructions here:
+- use arrow keys to move
+- use SPACE bar to jump
+- match your commands to the beat of the music
+- solve math problems to avoid obstacles
+- if you miss a beat/obstacle, its game over
+- get through all the obstacles and match the beats to win the game!
         { fontSize: '20px', fontWeight: 'bold', fill: '#000000', align: 'center' }
     ).setAlpha(0); // Set to invisible initially
 
