@@ -14,7 +14,33 @@ class StartScene extends Phaser.Scene {
             .setScale(0.75)
             .setInteractive()
             .on("pointerdown", () => {
-                this.scene.start("InstructionScene"); // Switch to InstructionScene
+                this.scene.start("CreditsScene"); // Switch to CreditsScene
+            });
+    }
+}
+
+// Credits Scene
+class CreditsScene extends Phaser.Scene {
+    constructor() {
+        super("CreditsScene");
+    }
+    preload() {
+        this.load.image("creditsBg", "assets/peachpuffbg.png"); // Load credits background
+        this.load.image("instructions", "assets/instructionsbutton.png"); // Load button
+    }
+    create() {
+        this.add.image(612, 598, "creditsBg").setScale(1); // Set background image
+
+        this.add.text(200, 50, "Credits", { fontSize: "50px", fill: "black" });
+        this.add.text(220, 150, "Made By", { fontSize: "35px", fill: "black" });
+        this.add.text(160, 250, "🎵 Nancy Chen 🎵", { fontSize: "30px", fill: "black" });
+        this.add.text(140, 350, "🎵 Simran Sayeed 🎵", { fontSize: "30px", fill: "black" });
+
+        const instructionsButton = this.add.image(300, 500, 'instructions')
+        .setScale(0.350)
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.scene.start("InstructionScene");
             });
     }
 }
@@ -70,6 +96,13 @@ class HomeScene extends Phaser.Scene {
                     this.scene.start(level);
                 });
         });
+
+        const instructionsButton = this.add.image(300, 500, 'instructions')
+        .setScale(0.350)
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.scene.start("InstructionScene");
+            });
     }
 }
 
@@ -177,7 +210,7 @@ const config = {
     type: Phaser.AUTO,
     width: 612,
     height: 598,
-    scene: [StartScene, InstructionScene, HomeScene, Level1, Level2, Level3, Level4, Level5]
+    scene: [StartScene, CreditsScene, InstructionScene, HomeScene, Level1, Level2, Level3, Level4, Level5]
 };
 
 const game = new Phaser.Game(config);
