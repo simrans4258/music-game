@@ -9,8 +9,8 @@ class StartScene extends Phaser.Scene {
     }
     create() {
         this.add.image(0, 0, "startBg").setOrigin(0, 0).setDisplaySize(this.scale.width, this.scale.height).setScale(1); // Set background image
-        // Create an "Instructions" button
-        const instructionsButton = this.add.image(this.scale.width / 2, this.scale.height / 2, 'button')
+        // Create an "Credits" button
+        const CreditsButton = this.add.image(this.scale.width / 2, this.scale.height / 2, 'button')
             .setScale(0.75)
             .setInteractive()
             .on("pointerdown", () => {
@@ -26,23 +26,105 @@ class CreditsScene extends Phaser.Scene {
     }
     preload() {
         this.load.image("creditsBg", "assets/peachpuffbg.png"); // Load credits background
-        this.load.image("instructions", "assets/instructionsbutton.png"); // Load button
+        this.load.image("options", "assets/options.jpg"); // Load button
     }
     create() {
         this.add.image(612, 598, "creditsBg").setScale(1); // Set background image
 
         this.add.text(200, 50, "Credits", { fontSize: "50px", fill: "black" });
-        this.add.text(220, 150, "Made By", { fontSize: "35px", fill: "black" });
+        this.add.text(230, 150, "Made By", { fontSize: "35px", fill: "black" });
         this.add.text(160, 250, "🎵 Nancy Chen 🎵", { fontSize: "30px", fill: "black" });
         this.add.text(140, 350, "🎵 Simran Sayeed 🎵", { fontSize: "30px", fill: "black" });
 
-        const instructionsButton = this.add.image(300, 500, 'instructions')
-        .setScale(0.350)
+        const button = this.add.text(150, 450, 'Character Options', {
+            fontSize: '30px',
+            color: 'black',
+            borderRadius: '25px',
+            backgroundColor: '#51ff4b',
+            padding: { x: 10, y: 10 }
+        })
+        .setInteractive()
+        .on('pointerdown', () => {
+            this.scene.start("CharacterScene");
+        });
+    }
+}
+
+// Choose Character Scene
+class CharacterScene extends Phaser.Scene {
+    constructor() {
+        super({ key: "CharacterScene" });
+    }
+    preload() {
+        this.load.image("charactersBg", "assets/peachpuffbg.png"); // Load characters background
+        this.load.image("instructions", "assets/instructionsbutton.png"); // Load button
+
+        this.load.image("chick", "assets/baby_chick_3d.png");
+        this.load.image("blackcat", "assets/black_cat_3d.png");
+        this.load.image("lightcat", "assets/cat_3d.png");
+        this.load.image("chipmunk", "assets/chipmunk_3d.png");
+        this.load.image("cow", "assets/cow_3d.png");
+        this.load.image("dog", "assets/dog_3d.png");
+        this.load.image("poodle", "assets/poodle_3d.png");
+        this.load.image("gorilla", "assets/gorilla_3d.png");
+        this.load.image("hedgehog", "assets/hedgehog_3d.png");
+        this.load.image("honeybee", "assets/honeybee_3d.png");
+        this.load.image("monkey", "assets/monkey_3d.png");
+        this.load.image("pig", "assets/pig_3d.png");
+        this.load.image("rabbit", "assets/rabbit_3d.png");
+        this.load.image("tiger", "assets/tiger_3d.png");
+    }
+    create() {
+        this.add.image(612, 598, "charactersBg").setScale(1);
+
+        this.add.image(100, 150, "chick").setScale(0.35);
+        this.add.image(200, 150, "blackcat").setScale(0.35);
+        this.add.image(300, 150, "lightcat").setScale(0.35);
+        this.add.image(400, 150, "chipmunk").setScale(0.35);
+        this.add.image(500, 150, "cow").setScale(0.35);
+        this.add.image(100, 290, "dog").setScale(0.35);
+        this.add.image(200, 290, "poodle").setScale(0.35);
+        this.add.image(300, 290, "gorilla").setScale(0.35);
+        this.add.image(400, 290, "hedgehog").setScale(0.35);
+        this.add.image(500, 290, "honeybee").setScale(0.35);
+        this.add.image(150, 400, "monkey").setScale(0.35);
+        this.add.image(250, 400, "pig").setScale(0.35);
+        this.add.image(350, 400, "rabbit").setScale(0.35);
+        this.add.image(450, 400, "tiger").setScale(0.35);
+
+        this.add.text(300, 50, "Choose Your Character", { fontSize: "32px", fill: "#000000" }).setOrigin(0.5);
+
+    //     const characters = [
+    //         { key: "chick", x: 250 },
+    //         { key: "blackcat", x: 400 },
+    //         { key: "lightcat", x: 550 }
+    //     ];
+
+    //     characters.forEach((char) => {
+    //         let characterSprite = this.add.sprite(char.x, 300, char.key).setInteractive();
+    //         characterSprite.setScale(1.5);
+
+    //         characterSprite.on("pointerover", () => {
+    //             characterSprite.setTint(0x87ceeb);
+    //         });
+
+    //         characterSprite.on("pointerdown", () => {
+    //             this.selectCharacter(char.key);
+    //         });
+    //     });
+
+        const instructionsButton = this.add.image(300, 520, 'instructions')
+            .setScale(0.350)
             .setInteractive()
             .on("pointerdown", () => {
                 this.scene.start("InstructionScene");
             });
     }
+
+    // selectCharacter(characterKey) {
+    //     this.registry.set("selectedCharacter", characterKey);
+    //     this.scene.start("InstructionScene");
+    // }
 }
 
 // Instruction Scene
@@ -113,16 +195,19 @@ class Level1 extends Phaser.Scene {
     }
     preload() {
         this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
+        this.load.image("home", "assets/home.png"); // Load home button
     }
     create() {
         this.add.image(612, 598, "levelbg").setScale(1); // Set background image
+
         this.add.text(200, 100, "Welcome to Level 1", { fontSize: "24px", fill: "black" });
         // "Back to Home" button
-        const backButton = this.add.text(200, 300, "Back to Home", { fontSize: "24px", fill: "black" })
+        const homeButton = this.add.image(300, 500, 'home')
+        .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
-                this.scene.start("HomeScene"); // Switch back to the home screen
-        });
+                this.scene.start("HomeScene");
+            });
     }
 }
 
@@ -133,16 +218,18 @@ class Level2 extends Phaser.Scene {
     }
     preload() {
         this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
+        this.load.image("home", "assets/home.png"); // Load home button
     }
     create() {
         this.add.image(612, 598, "levelbg").setScale(1); // Set background image
         this.add.text(200, 100, "Welcome to Level 2", { fontSize: "24px", fill: "black" });
         // "Back to Home" button
-        const backButton = this.add.text(200, 300, "Back to Home", { fontSize: "24px", fill: "black" })
+        const homeButton = this.add.image(300, 500, 'home')
+        .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
-                this.scene.start("HomeScene"); // Switch back to the home screen
-        });
+                this.scene.start("HomeScene");
+            });
     }
 }
 
@@ -153,16 +240,18 @@ class Level3 extends Phaser.Scene {
     }
     preload() {
         this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
+        this.load.image("home", "assets/home.png"); // Load home button
     }
     create() {
         this.add.image(612, 598, "levelbg").setScale(1); // Set background image
         this.add.text(200, 100, "Welcome to Level 3", { fontSize: "24px", fill: "black" });
         // "Back to Home" button
-        const backButton = this.add.text(200, 300, "Back to Home", { fontSize: "24px", fill: "black" })
+        const homeButton = this.add.image(300, 500, 'home')
+        .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
-                this.scene.start("HomeScene"); // Switch back to the home screen
-        });
+                this.scene.start("HomeScene");
+            });
     }
 }
 
@@ -173,16 +262,18 @@ class Level4 extends Phaser.Scene {
     }
     preload() {
         this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
+        this.load.image("home", "assets/home.png"); // Load home button
     }
     create() {
         this.add.image(612, 598, "levelbg").setScale(1); // Set background image
         this.add.text(200, 100, "Welcome to Level 4", { fontSize: "24px", fill: "black" });
         // "Back to Home" button
-        const backButton = this.add.text(200, 300, "Back to Home", { fontSize: "24px", fill: "black" })
+        const homeButton = this.add.image(300, 500, 'home')
+        .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
-                this.scene.start("HomeScene"); // Switch back to the home screen
-        });
+                this.scene.start("HomeScene");
+            });
     }
 }
 
@@ -193,16 +284,18 @@ class Level5 extends Phaser.Scene {
     }
     preload() {
         this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
+        this.load.image("home", "assets/home.png"); // Load home button
     }
     create() {
         this.add.image(612, 598, "levelbg").setScale(1); // Set background image
         this.add.text(200, 100, "Welcome to Level 5", { fontSize: "24px", fill: "black" });
         // "Back to Home" button
-        const backButton = this.add.text(200, 300, "Back to Home", { fontSize: "24px", fill: "black" })
+        const homeButton = this.add.image(300, 500, 'home')
+        .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
-                this.scene.start("HomeScene"); // Switch back to the home screen
-        });
+                this.scene.start("HomeScene");
+            });
     }
 }
 
@@ -210,7 +303,7 @@ const config = {
     type: Phaser.AUTO,
     width: 612,
     height: 598,
-    scene: [StartScene, CreditsScene, InstructionScene, HomeScene, Level1, Level2, Level3, Level4, Level5]
+    scene: [StartScene, CreditsScene, CharacterScene, InstructionScene, HomeScene, Level1, Level2, Level3, Level4, Level5]
 };
 
 const game = new Phaser.Game(config);
