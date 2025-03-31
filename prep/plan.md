@@ -80,6 +80,14 @@
 - https://earsketch.gatech.edu/earsketch2/?sharing=_gGHsvc6BDkde-hPHHbgDw
 -->
 
+<!-- equations to use
+4x+3=19
+5x−3=7
+1883−19x=97
+97=409−52x
+14+9z=581
+-->
+
 
 <!-- DO NOT USE THIS YET
 
