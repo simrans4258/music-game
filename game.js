@@ -49,7 +49,6 @@ class CreditsScene extends Phaser.Scene {
         });
     }
 }
-
 // Choose Character Scene
 class CharacterScene extends Phaser.Scene {
     constructor() {
@@ -94,24 +93,77 @@ class CharacterScene extends Phaser.Scene {
 
         this.add.text(300, 50, "Choose Your Character", { fontSize: "32px", fill: "#000000" }).setOrigin(0.5);
 
-    //     const characters = [
-    //         { key: "chick", x: 250 },
-    //         { key: "blackcat", x: 400 },
-    //         { key: "lightcat", x: 550 }
-    //     ];
+        let selectedAnimal = null;
+        let greenOutline = this.add.graphics();
+        greenOutline.lineStyle(12, 0xFF0000);
+        greenOutline.setVisible(false);
 
-    //     characters.forEach((char) => {
-    //         let characterSprite = this.add.sprite(char.x, 300, char.key).setInteractive();
-    //         characterSprite.setScale(1.5);
+        function handleCharacterSelection(character) {
+            greenOutline.clear();
+            greenOutline.lineStyle(6, 0x00FF00);
+            greenOutline.strokeRect(0, 0, character.width, character.height);
+            greenOutline.x = 20; // Fixed x position
+            greenOutline.y = 10; // Fixed y position
+            greenOutline.setVisible(true);
 
-    //         characterSprite.on("pointerover", () => {
-    //             characterSprite.setTint(0x87ceeb);
-    //         });
+            selectedAnimal = character;
+        }
 
-    //         characterSprite.on("pointerdown", () => {
-    //             this.selectCharacter(char.key);
-    //         });
-    //     });
+        let chick = this.add.image(100, 150, 'chick').setScale(0.35);
+        chick.setInteractive();
+        chick.on('pointerdown', () => handleCharacterSelection(chick));
+
+        let blackcat = this.add.image(200, 150, 'blackcat').setScale(0.35);
+        blackcat.setInteractive();
+        blackcat.on('pointerdown', () => handleCharacterSelection(blackcat));
+
+        let lightcat = this.add.image(300, 150, 'lightcat').setScale(0.35);
+        lightcat.setInteractive();
+        lightcat.on('pointerdown', () => handleCharacterSelection(lightcat));
+
+        let chipmunk = this.add.image(400, 150, 'chipmunk').setScale(0.35);
+        chipmunk.setInteractive();
+        chipmunk.on('pointerdown', () => handleCharacterSelection(chipmunk));
+
+        let cow = this.add.image(500, 150, 'cow').setScale(0.35);
+        cow.setInteractive();
+        cow.on('pointerdown', () => handleCharacterSelection(cow));
+
+        let dog = this.add.image(100, 290, 'dog').setScale(0.35);
+        dog.setInteractive();
+        dog.on('pointerdown', () => handleCharacterSelection(dog));
+
+        let poodle = this.add.image(200, 290, 'poodle').setScale(0.35);
+        poodle.setInteractive();
+        poodle.on('pointerdown', () => handleCharacterSelection(poodle));
+
+        let gorilla = this.add.image(300, 290, 'gorilla').setScale(0.35);
+        gorilla.setInteractive();
+        gorilla.on('pointerdown', () => handleCharacterSelection(gorilla));
+
+        let hedgehog = this.add.image(400, 290, 'hedgehog').setScale(0.35);
+        hedgehog.setInteractive();
+        hedgehog.on('pointerdown', () => handleCharacterSelection(hedgehog));
+
+        let honeybee = this.add.image(500, 290, 'honeybee').setScale(0.35);
+        honeybee.setInteractive();
+        honeybee.on('pointerdown', () => handleCharacterSelection(honeybee));
+
+        let monkey = this.add.image(150, 400, 'monkey').setScale(0.35);
+        monkey.setInteractive();
+        monkey.on('pointerdown', () => handleCharacterSelection(monkey));
+
+        let pig = this.add.image(250, 400, 'pig').setScale(0.35);
+        pig.setInteractive();
+        pig.on('pointerdown', () => handleCharacterSelection(pig));
+
+        let rabbit = this.add.image(350, 400, 'rabbit').setScale(0.35);
+        rabbit.setInteractive();
+        rabbit.on('pointerdown', () => handleCharacterSelection(rabbit));
+
+        let tiger = this.add.image(450, 400, 'tiger').setScale(0.35);
+        tiger.setInteractive();
+        tiger.on('pointerdown', () => handleCharacterSelection(tiger));
 
         const instructionsButton = this.add.image(300, 520, 'instructions')
             .setScale(0.350)
@@ -120,11 +172,6 @@ class CharacterScene extends Phaser.Scene {
                 this.scene.start("InstructionScene");
             });
     }
-
-    // selectCharacter(characterKey) {
-    //     this.registry.set("selectedCharacter", characterKey);
-    //     this.scene.start("InstructionScene");
-    // }
 }
 
 // Instruction Scene
@@ -149,12 +196,25 @@ class InstructionScene extends Phaser.Scene {
         this.add.text(70, 390, "Get through all the obstacles", { fontSize: "23px", fill: "black" });
         this.add.text(70, 440, "Match the beats to win the game!", { fontSize: "23px", fill: "black" });
 
-        const startButton = this.add.image(150, 530, 'start')
+        const startButton = this.add.image(100, 530, 'start')
         .setScale(0.20)
             .setInteractive()
             .on("pointerdown", () => {
                 this.scene.start("HomeScene");
             });
+
+        const button = this.add.text(250, 505, 'Character Options', {
+            fontSize: '30px',
+            color: 'black',
+            borderRadius: '25px',
+            backgroundColor: '#51ff4b',
+            padding: { x: 10, y: 10 }
+        })
+        .setInteractive()
+        .on('pointerdown', () => {
+            this.scene.start("CharacterScene");
+        });
+
     }
 }
 
@@ -196,10 +256,13 @@ class Level1 extends Phaser.Scene {
     preload() {
         this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
         this.load.image("home", "assets/home.png"); // Load home button
+        this.load.image('sky', './assets/sky.png');
+        this.load.image('ground', './assets/platform.png');
+        this.load.image('onenote', './assets/musicalnotesone.png');
+        this.load.image('threenotes', './assets/musicnoteonne.png');
     }
     create() {
         this.add.image(612, 598, "levelbg").setScale(1); // Set background image
-
         this.add.text(200, 100, "Welcome to Level 1", { fontSize: "24px", fill: "black" });
         // "Back to Home" button
         const homeButton = this.add.image(300, 500, 'home')
