@@ -101,9 +101,9 @@ class CharacterScene extends Phaser.Scene {
         function handleCharacterSelection(character) {
             greenOutline.clear();
             greenOutline.lineStyle(6, 0x00FF00);
-            greenOutline.strokeRect(0, 0, character.width, character.height);
-            greenOutline.x = 20; // Fixed x position
-            greenOutline.y = 10; // Fixed y position
+            greenOutline.strokeRect(0, 0, 90, 90);
+            greenOutline.x = 55; // Fixed x position
+            greenOutline.y = 110; // Fixed y position
             greenOutline.setVisible(true);
 
             selectedAnimal = character;
@@ -111,59 +111,59 @@ class CharacterScene extends Phaser.Scene {
 
         let chick = this.add.image(100, 150, 'chick').setScale(0.35);
         chick.setInteractive();
-        chick.on('pointerdown', () => handleCharacterSelection(chick));
+        chick.on('pointerdown', () => handleCharacterSelection('chick'));
 
         let blackcat = this.add.image(200, 150, 'blackcat').setScale(0.35);
         blackcat.setInteractive();
-        blackcat.on('pointerdown', () => handleCharacterSelection(blackcat));
+        blackcat.on('pointerdown', () => handleCharacterSelection('blackcat'));
 
         let lightcat = this.add.image(300, 150, 'lightcat').setScale(0.35);
         lightcat.setInteractive();
-        lightcat.on('pointerdown', () => handleCharacterSelection(lightcat));
+        lightcat.on('pointerdown', () => handleCharacterSelection('lightcat'));
 
         let chipmunk = this.add.image(400, 150, 'chipmunk').setScale(0.35);
         chipmunk.setInteractive();
-        chipmunk.on('pointerdown', () => handleCharacterSelection(chipmunk));
+        chipmunk.on('pointerdown', () => handleCharacterSelection('chipmunk'));
 
         let cow = this.add.image(500, 150, 'cow').setScale(0.35);
         cow.setInteractive();
-        cow.on('pointerdown', () => handleCharacterSelection(cow));
+        cow.on('pointerdown', () => handleCharacterSelection('cow'));
 
         let dog = this.add.image(100, 290, 'dog').setScale(0.35);
         dog.setInteractive();
-        dog.on('pointerdown', () => handleCharacterSelection(dog));
+        dog.on('pointerdown', () => handleCharacterSelection('dog'));
 
         let poodle = this.add.image(200, 290, 'poodle').setScale(0.35);
         poodle.setInteractive();
-        poodle.on('pointerdown', () => handleCharacterSelection(poodle));
+        poodle.on('pointerdown', () => handleCharacterSelection('poodle'));
 
         let gorilla = this.add.image(300, 290, 'gorilla').setScale(0.35);
         gorilla.setInteractive();
-        gorilla.on('pointerdown', () => handleCharacterSelection(gorilla));
+        gorilla.on('pointerdown', () => handleCharacterSelection('gorilla'));
 
         let hedgehog = this.add.image(400, 290, 'hedgehog').setScale(0.35);
         hedgehog.setInteractive();
-        hedgehog.on('pointerdown', () => handleCharacterSelection(hedgehog));
+        hedgehog.on('pointerdown', () => handleCharacterSelection('hedgehog'));
 
         let honeybee = this.add.image(500, 290, 'honeybee').setScale(0.35);
         honeybee.setInteractive();
-        honeybee.on('pointerdown', () => handleCharacterSelection(honeybee));
+        honeybee.on('pointerdown', () => handleCharacterSelection('honeybee'));
 
         let monkey = this.add.image(150, 400, 'monkey').setScale(0.35);
         monkey.setInteractive();
-        monkey.on('pointerdown', () => handleCharacterSelection(monkey));
+        monkey.on('pointerdown', () => handleCharacterSelection('monkey'));
 
         let pig = this.add.image(250, 400, 'pig').setScale(0.35);
         pig.setInteractive();
-        pig.on('pointerdown', () => handleCharacterSelection(pig));
+        pig.on('pointerdown', () => handleCharacterSelection('pig'));
 
         let rabbit = this.add.image(350, 400, 'rabbit').setScale(0.35);
         rabbit.setInteractive();
-        rabbit.on('pointerdown', () => handleCharacterSelection(rabbit));
+        rabbit.on('pointerdown', () => handleCharacterSelection('rabbit'));
 
         let tiger = this.add.image(450, 400, 'tiger').setScale(0.35);
         tiger.setInteractive();
-        tiger.on('pointerdown', () => handleCharacterSelection(tiger));
+        tiger.on('pointerdown', () => handleCharacterSelection('tiger'));
 
         const instructionsButton = this.add.image(300, 520, 'instructions')
             .setScale(0.350)
@@ -263,7 +263,6 @@ class Level1 extends Phaser.Scene {
     }
     create() {
         this.add.image(612, 598, "levelbg").setScale(1); // Set background image
-        this.add.text(200, 100, "Welcome to Level 1", { fontSize: "24px", fill: "black" });
         // "Back to Home" button
         const homeButton = this.add.image(300, 500, 'home')
         .setScale(0.50)
