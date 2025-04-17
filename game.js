@@ -31,15 +31,15 @@ class CreditsScene extends Phaser.Scene {
     create() {
         this.add.image(612, 598, "creditsBg").setScale(1); // Set background image
 
-        this.add.text(200, 50, "Credits", { fontSize: "50px", fill: "black" });
-        this.add.text(230, 150, "Made By", { fontSize: "35px", fill: "black" });
-        this.add.text(160, 250, "🎵 Nancy Chen 🎵", { fontSize: "30px", fill: "black" });
-        this.add.text(140, 350, "🎵 Simran Sayeed 🎵", { fontSize: "30px", fill: "black" });
-
-        const button = this.add.text(150, 450, 'Character Options', {
-            fontSize: '30px',
+        this.add.text(225, 50, "Credits", {fontFamily: 'Nunito', stroke: '#000000', strokeThickness: 1.9, fontSize: '50px', fill: 'black'});
+        this.add.text(225, 150, "Made By", {fontFamily: 'Nunito', stroke: '#000000', strokeThickness: 1.9, fontSize: "40px", fill: "black" });
+        this.add.text(165, 250, "🎵 Nancy Chen 🎵", {fontFamily: 'Nunito', fontSize: "30px", fill: "black" });
+        this.add.text(145, 350, "🎵 Simran Sayeed 🎵", {fontFamily: 'Nunito', fontSize: "30px", fill: "black" });
+        //width: 612, height: 598,
+        const button = this.add.text(125, 450, 'Character Options', {
+            fontFamily: 'Nunito',
+            fontSize: '40px',
             color: 'black',
-            borderRadius: '25px',
             backgroundColor: '#51ff4b',
             padding: { x: 10, y: 10 }
         })
@@ -91,7 +91,7 @@ class CharacterScene extends Phaser.Scene {
         this.add.image(350, 400, "rabbit").setScale(0.35);
         this.add.image(450, 400, "tiger").setScale(0.35);
 
-        this.add.text(300, 50, "Choose Your Character", { fontSize: "32px", fill: "#000000" }).setOrigin(0.5);
+        this.add.text(300, 50, "Choose Your Character", {fontFamily: 'Nunito', stroke: '#000000', strokeThickness: 1.9, fontSize: "40px", fill: "#000000" }).setOrigin(0.5);
 
         let selectedAnimal = null;
         let greenOutline = this.add.graphics();
@@ -185,26 +185,25 @@ class InstructionScene extends Phaser.Scene {
     }
     create() {
         this.add.image(612, 598, "instructionsBg").setScale(1); // Set background image
-        this.add.text(50, 50, "Game Instructions", { fontSize: "23.5px", fill: "black" });
-        this.add.text(70, 100, "Use arrow keys to move", { fontSize: "23px", fill: "black" });
-        this.add.text(70, 150, "Use SPACE bar to jump", { fontSize: "23px", fill: "black" });
-        this.add.text(70, 200, "Match your commands to the beat of", { fontSize: "23px", fill: "black" });
-        this.add.text(70, 220, "the music", { fontSize: "23px", fill: "black" });
-        this.add.text(70, 270, "Solve math problems to avoid obstacles", { fontSize: "23px", fill: "black" });
-        this.add.text(70, 320, "If you miss a beat/obstacle, it is", { fontSize: "23px", fill: "black" });
-        this.add.text(70, 340, "game over", { fontSize: "23px", fill: "black" });
-        this.add.text(70, 390, "Get through all the obstacles", { fontSize: "23px", fill: "black" });
-        this.add.text(70, 440, "Match the beats to win the game!", { fontSize: "23px", fill: "black" });
+        this.add.text(25, 25, "Game Instructions", {fontFamily: 'Nunito',stroke: '#000000', strokeThickness: 1.5, fontSize: "35px", fill: "black" });
+        this.add.text(50, 100, "Use arrow keys to move", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
+        this.add.text(50, 150, "Use SPACE bar to jump", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
+        this.add.text(50, 200, "Match your commands to the beat of the music", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
+        this.add.text(50, 250, "Solve math problems to avoid obstacles", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
+        this.add.text(50, 300, "If you miss a beat/obstacle, it is game over", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
+        this.add.text(50, 350, "Get through all the obstacles", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
+        this.add.text(50, 400, "Match the beats to win the game!", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
 
-        const startButton = this.add.image(100, 530, 'start')
+        const startButton = this.add.image(110, 520, 'start')
         .setScale(0.20)
             .setInteractive()
             .on("pointerdown", () => {
                 this.scene.start("HomeScene");
             });
 
-        const button = this.add.text(250, 505, 'Character Options', {
-            fontSize: '30px',
+        const button = this.add.text(235, 490, 'Character Options', {
+            fontFamily: 'Nunito',
+            fontSize: '40px',
             color: 'black',
             borderRadius: '25px',
             backgroundColor: '#51ff4b',
@@ -228,11 +227,11 @@ class HomeScene extends Phaser.Scene {
     }
     create() {
         this.add.image(612, 598, "homeBg").setScale(1); // Set background image
-        this.add.text(50, 50, "Select a Level", { fontSize: "35px", fill: "black" });
+        this.add.text(50, 50, "Select a Level", {fontFamily: 'Nunito', fontSize: "35px", fill: "black" });
 
         const levels = ["Level1", "Level2", "Level3", "Level4", "Level5"];
         levels.forEach((level, index) => {
-            this.add.text(70, 150 + index * 50, level, { fontSize: "32px", fill: "black" })
+            this.add.text(70, 150 + index * 50, level, {fontFamily: 'Nunito', fontSize: "32px", fill: "black" })
                 .setInteractive()
                 .on("pointerdown", () => {
                     this.scene.start(level);
@@ -254,7 +253,6 @@ class Level1 extends Phaser.Scene {
         super("Level1");
     }
     preload() {
-        this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
         this.load.image("home", "assets/home.png"); // Load home button
         this.load.image('sky', './assets/sky.png');
         this.load.image('ground', './assets/platform.png');
@@ -262,7 +260,25 @@ class Level1 extends Phaser.Scene {
         this.load.image('threenotes', './assets/musicnoteonne.png');
     }
     create() {
-        this.add.image(612, 598, "levelbg").setScale(1); // Set background image
+        //this.physics.startSystem(Phaser.Physics.ARCADE);
+
+        this.add.sprite(0,0,'sky').setScale(2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // "Back to Home" button
         const homeButton = this.add.image(300, 500, 'home')
         .setScale(0.50)
