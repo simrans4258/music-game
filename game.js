@@ -299,7 +299,7 @@ class Level1 extends Phaser.Scene {
     preload() {
         this.load.image("home", "assets/home.png"); // Load home button
         this.load.image('sky', './assets/sky.png');
-        this.load.image('ground', './assets/platform.png');
+        this.load.image('ground', './assets/platform2.jpg');
         this.load.image('onenote', './assets/musicalnotesone.png');
         this.load.image('threenotes', './assets/musicnoteonne.png');
     }
@@ -307,21 +307,12 @@ class Level1 extends Phaser.Scene {
         //this.physics.startSystem(Phaser.Physics.ARCADE);
 
         this.add.sprite(0,0,'sky').setScale(2);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        this.add.sprite(90,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(180,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(270,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(360,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(450,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(540,547,'ground').setScale(0.5,0.75);
 
         // "Back to Home" button
         const homeButton = this.add.image(300, 500, 'home')
@@ -339,12 +330,20 @@ class Level2 extends Phaser.Scene {
         super("Level2");
     }
     preload() {
-        this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
         this.load.image("home", "assets/home.png"); // Load home button
+        this.load.image('sky', './assets/sky.png');
+        this.load.image('ground', './assets/platform2.jpg');
+        this.load.image('onenote', './assets/musicalnotesone.png');
+        this.load.image('threenotes', './assets/musicnoteonne.png');
     }
     create() {
-        this.add.image(612, 598, "levelbg").setScale(1); // Set background image
-        this.add.text(200, 100, "Welcome to Level 2", { fontSize: "24px", fill: "black" });
+        this.add.sprite(0,0,'sky').setScale(2);
+        this.add.sprite(90,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(180,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(270,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(360,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(450,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(540,547,'ground').setScale(0.5,0.75);
         // "Back to Home" button
         const homeButton = this.add.image(300, 500, 'home')
         .setScale(0.50)
@@ -361,12 +360,20 @@ class Level3 extends Phaser.Scene {
         super("Level3");
     }
     preload() {
-        this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
         this.load.image("home", "assets/home.png"); // Load home button
+        this.load.image('sky', './assets/sky.png');
+        this.load.image('ground', './assets/platform2.jpg');
+        this.load.image('onenote', './assets/musicalnotesone.png');
+        this.load.image('threenotes', './assets/musicnoteonne.png');
     }
     create() {
-        this.add.image(612, 598, "levelbg").setScale(1); // Set background image
-        this.add.text(200, 100, "Welcome to Level 3", { fontSize: "24px", fill: "black" });
+        this.add.sprite(0,0,'sky').setScale(2);
+        this.add.sprite(90,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(180,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(270,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(360,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(450,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(540,547,'ground').setScale(0.5,0.75);
         // "Back to Home" button
         const homeButton = this.add.image(300, 500, 'home')
         .setScale(0.50)
@@ -383,12 +390,20 @@ class Level4 extends Phaser.Scene {
         super("Level4");
     }
     preload() {
-        this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
         this.load.image("home", "assets/home.png"); // Load home button
+        this.load.image('sky', './assets/sky.png');
+        this.load.image('ground', './assets/platform2.jpg');
+        this.load.image('onenote', './assets/musicalnotesone.png');
+        this.load.image('threenotes', './assets/musicnoteonne.png');
     }
     create() {
-        this.add.image(612, 598, "levelbg").setScale(1); // Set background image
-        this.add.text(200, 100, "Welcome to Level 4", { fontSize: "24px", fill: "black" });
+        this.add.sprite(0,0,'sky').setScale(2);
+        this.add.sprite(90,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(180,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(270,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(360,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(450,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(540,547,'ground').setScale(0.5,0.75);
         // "Back to Home" button
         const homeButton = this.add.image(300, 500, 'home')
         .setScale(0.50)
@@ -405,12 +420,20 @@ class Level5 extends Phaser.Scene {
         super("Level5");
     }
     preload() {
-        this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
         this.load.image("home", "assets/home.png"); // Load home button
+        this.load.image('sky', './assets/sky.png');
+        this.load.image('ground', './assets/platform2.jpg');
+        this.load.image('onenote', './assets/musicalnotesone.png');
+        this.load.image('threenotes', './assets/musicnoteonne.png');
     }
     create() {
-        this.add.image(612, 598, "levelbg").setScale(1); // Set background image
-        this.add.text(200, 100, "Welcome to Level 5", { fontSize: "24px", fill: "black" });
+        this.add.sprite(0,0,'sky').setScale(2);
+        this.add.sprite(90,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(180,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(270,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(360,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(450,547,'ground').setScale(0.5,0.75);
+        this.add.sprite(540,547,'ground').setScale(0.5,0.75);
         // "Back to Home" button
         const homeButton = this.add.image(300, 500, 'home')
         .setScale(0.50)
