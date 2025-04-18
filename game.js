@@ -193,15 +193,16 @@ class InstructionScene extends Phaser.Scene {
         this.add.text(50, 300, "If you miss a beat/obstacle, it is game over", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
         this.add.text(50, 350, "Get through all the obstacles", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
         this.add.text(50, 400, "Match the beats to win the game!", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
+        this.add.text(50, 450, "Good luck & have fun!", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
 
-        const startButton = this.add.image(110, 520, 'start')
+        const startButton = this.add.image(110, 530, 'start')
         .setScale(0.20)
             .setInteractive()
             .on("pointerdown", () => {
                 this.scene.start("HomeScene");
             });
 
-        const button = this.add.text(235, 490, 'Character Options', {
+        const button = this.add.text(235, 495, 'Character Options', {
             fontFamily: 'Nunito',
             fontSize: '40px',
             color: 'black',
@@ -224,18 +225,54 @@ class HomeScene extends Phaser.Scene {
     }
     preload() {
         this.load.image("homeBg", "assets/peachpuffbg.png"); // Load home background
+        this.load.image("settings", "assets/setting.png"); // Load button
     }
     create() {
         this.add.image(612, 598, "homeBg").setScale(1); // Set background image
-        this.add.text(50, 50, "Select a Level", {fontFamily: 'Nunito', fontSize: "35px", fill: "black" });
+        this.add.text(25, 25, "Select a Level", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "40px", fill: "black" });
 
-        const levels = ["Level1", "Level2", "Level3", "Level4", "Level5"];
-        levels.forEach((level, index) => {
-            this.add.text(70, 150 + index * 50, level, {fontFamily: 'Nunito', fontSize: "32px", fill: "black" })
-                .setInteractive()
-                .on("pointerdown", () => {
-                    this.scene.start(level);
-                });
+        const levelData = [
+            { key: "Level1", x: 130, y: 180, label: "1" },
+            { key: "Level2", x: 290, y: 180, label: "2" },
+            { key: "Level3", x: 450, y: 180, label: "3" },
+            { key: "Level4", x: 210, y: 350, label: "4" },
+            { key: "Level5", x: 370, y: 350, label: "5" },
+        ];
+
+        levelData.forEach((level) => {
+            // Create a circle for the button
+            const circle = this.add.circle(level.x, level.y, 50, 0x84c7ff); // Example fill color
+            circle.setInteractive(); // Make it clickable
+
+            // Style the circle to have a black stroke (border)
+            circle.setStrokeStyle(2, 0x000000); // 2 is the thickness, 0x000000 is black
+            circle.alpha = 0.8;
+
+            // Create text for the button label
+            const text = this.add.text(level.x, level.y, level.label, {
+                fontFamily: 'Nunito',
+                stroke: '#000000',
+                strokeThickness: 1.9,
+                fontSize: '40px',
+                fill: '#000000',
+                align: 'center',
+            }).setOrigin(0.5);
+
+            // Add a glow effect on hover (optional)
+            circle.on('pointerover', () => {
+                circle.setFillStyle(0x80ff75);
+                circle.alpha = 1;
+            });
+
+            circle.on('pointerout', () => {
+                circle.setFillStyle(0x80ff75);
+                circle.alpha = 0.8;
+            });
+
+            // Handle button click to start the level
+            circle.on('pointerdown', () => {
+                this.scene.start(level.key);
+            });
         });
 
         const instructionsButton = this.add.image(300, 500, 'instructions')
@@ -243,6 +280,13 @@ class HomeScene extends Phaser.Scene {
             .setInteractive()
             .on("pointerdown", () => {
                 this.scene.start("InstructionScene");
+            });
+
+        const settingsButton = this.add.image(490, 50, 'settings')
+        .setScale(0.20)
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.scene.start("SettingScene");
             });
     }
 }
@@ -377,11 +421,56 @@ class Level5 extends Phaser.Scene {
     }
 }
 
+// Setting Scene
+class SettingScene extends Phaser.Scene {
+    constructor() {
+        super("SettingScene");
+    }
+    preload() {
+        this.load.image("levelbg", "assets/peachpuffbg.png"); // Load home background
+        this.load.image("home", "assets/home.png"); // Load home button
+        this.load.image("mspeaker", "assets/mspeaker.png");
+        this.load.image("lspeaker", "assets/lspeaker.png");
+        this.load.image("mdspeaker", "assets/mdspeaker.png");
+        this.load.image("hspeaker", "assets/hspeaker.png");
+        this.load.image("up", "assets/up.png");
+    }
+    create() {
+        this.add.image(612, 598, "levelbg").setScale(1); // Set background image
+        this.add.image(100, 200, "mspeaker").setScale(0.5);
+        this.add.image(100, 400, "lspeaker").setScale(0.5);
+        this.add.image(400, 185, "mdspeaker").setScale(0.5);
+        this.add.image(400, 400, "hspeaker").setScale(0.5);
+        this.add.image(500, 525, "up").setScale(0.35);
+        this.add.image(100, 525, "up").setScale(0.35);
+
+        this.add.text(250, 25, "Setting", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "40px", fill: "black" });
+        this.add.text(140, 140, "Mute", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "35px", fill: "black" });
+        this.add.text(140, 180, "Sound", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "35px", fill: "black" });
+        this.add.text(450, 140, "Medium", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "35px", fill: "black" });
+        this.add.text(450, 180, "Sound", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "35px", fill: "black" });
+        this.add.text(140, 340, "Low", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "35px", fill: "black" });
+        this.add.text(140, 380, "Sound", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "35px", fill: "black" });
+        this.add.text(470, 360, "High", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "35px", fill: "black" });
+        this.add.text(470, 400, "Sound", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "35px", fill: "black" });
+        this.add.text(160, 480, "Click the speakers to", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "30px", fill: "black" });
+        this.add.text(170, 525, "change the volume", {stroke: '#000000', strokeThickness: 1.9, fontFamily: 'Nunito', fontSize: "30px", fill: "black" });
+
+        const homeButton = this.add.image(315, 105, 'home')
+        .setScale(0.50)
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.scene.start("HomeScene");
+            });
+
+    }
+}
+
 const config = {
     type: Phaser.AUTO,
     width: 612,
     height: 598,
-    scene: [StartScene, CreditsScene, CharacterScene, InstructionScene, HomeScene, Level1, Level2, Level3, Level4, Level5]
+    scene: [StartScene, CreditsScene, CharacterScene, InstructionScene, HomeScene, Level1, Level2, Level3, Level4, Level5, SettingScene]
 };
 
 const game = new Phaser.Game(config);
