@@ -76,94 +76,45 @@ class CharacterScene extends Phaser.Scene {
     create() {
         this.add.image(612, 598, "charactersBg").setScale(1);
 
-        this.add.image(100, 150, "chick").setScale(0.35);
-        this.add.image(200, 150, "blackcat").setScale(0.35);
-        this.add.image(300, 150, "lightcat").setScale(0.35);
-        this.add.image(400, 150, "chipmunk").setScale(0.35);
-        this.add.image(500, 150, "cow").setScale(0.35);
-        this.add.image(100, 290, "dog").setScale(0.35);
-        this.add.image(200, 290, "poodle").setScale(0.35);
-        this.add.image(300, 290, "gorilla").setScale(0.35);
-        this.add.image(400, 290, "hedgehog").setScale(0.35);
-        this.add.image(500, 290, "honeybee").setScale(0.35);
-        this.add.image(150, 400, "monkey").setScale(0.35);
-        this.add.image(250, 400, "pig").setScale(0.35);
-        this.add.image(350, 400, "rabbit").setScale(0.35);
-        this.add.image(450, 400, "tiger").setScale(0.35);
+        const characterPositions = [
+            { key: "chick", x: 100, y: 150 },
+            { key: "blackcat", x: 200, y: 150 },
+            { key: "lightcat", x: 300, y: 150 },
+            { key: "chipmunk", x: 400, y: 150 },
+            { key: "cow", x: 500, y: 150 },
+            { key: "dog", x: 100, y: 290 },
+            { key: "poodle", x: 200, y: 290 },
+            { key: "gorilla", x: 300, y: 290 },
+            { key: "hedgehog", x: 400, y: 290 },
+            { key: "honeybee", x: 500, y: 290 },
+            { key: "monkey", x: 150, y: 400 },
+            { key: "pig", x: 250, y: 400 },
+            { key: "rabbit", x: 350, y: 400 },
+            { key: "tiger", x: 450, y: 400 }
+        ];
 
         this.add.text(300, 50, "Choose Your Character", {fontFamily: 'Nunito', stroke: '#000000', strokeThickness: 1.9, fontSize: "40px", fill: "#000000" }).setOrigin(0.5);
 
-        let selectedAnimal = null;
+        let selectedAnimalKey = null;
         let greenOutline = this.add.graphics();
-        greenOutline.lineStyle(12, 0xFF0000);
+        greenOutline.lineStyle(6, 0x00FF00);
+        greenOutline.strokeRect(0, 0, 90, 90);
         greenOutline.setVisible(false);
 
-        function handleCharacterSelection(character) {
-            greenOutline.clear();
-            greenOutline.lineStyle(6, 0x00FF00);
-            greenOutline.strokeRect(0, 0, 90, 90);
-            greenOutline.x = 55; // Fixed x position
-            greenOutline.y = 110; // Fixed y position
+        const handleCharacterSelection = (characterKey, image) => {
+            greenOutline.x = image.x - image.width * 0.3 / 2 - 5; // Adjust x based on scale and outline width
+            greenOutline.y = image.y - image.height * 0.31 / 2 - 5; // Adjust y based on scale and outline width
             greenOutline.setVisible(true);
+            selectedAnimalKey = characterKey;
+            this.game.global.selectedCharacterKey = characterKey; // Store the key globally
+            console.log('Selected character:', this.game.global.selectedCharacterKey);
+        };
 
-            selectedAnimal = character;
-        }
-
-        let chick = this.add.image(100, 150, 'chick').setScale(0.35);
-        chick.setInteractive();
-        chick.on('pointerdown', () => handleCharacterSelection('chick'));
-
-        let blackcat = this.add.image(200, 150, 'blackcat').setScale(0.35);
-        blackcat.setInteractive();
-        blackcat.on('pointerdown', () => handleCharacterSelection('blackcat'));
-
-        let lightcat = this.add.image(300, 150, 'lightcat').setScale(0.35);
-        lightcat.setInteractive();
-        lightcat.on('pointerdown', () => handleCharacterSelection('lightcat'));
-
-        let chipmunk = this.add.image(400, 150, 'chipmunk').setScale(0.35);
-        chipmunk.setInteractive();
-        chipmunk.on('pointerdown', () => handleCharacterSelection('chipmunk'));
-
-        let cow = this.add.image(500, 150, 'cow').setScale(0.35);
-        cow.setInteractive();
-        cow.on('pointerdown', () => handleCharacterSelection('cow'));
-
-        let dog = this.add.image(100, 290, 'dog').setScale(0.35);
-        dog.setInteractive();
-        dog.on('pointerdown', () => handleCharacterSelection('dog'));
-
-        let poodle = this.add.image(200, 290, 'poodle').setScale(0.35);
-        poodle.setInteractive();
-        poodle.on('pointerdown', () => handleCharacterSelection('poodle'));
-
-        let gorilla = this.add.image(300, 290, 'gorilla').setScale(0.35);
-        gorilla.setInteractive();
-        gorilla.on('pointerdown', () => handleCharacterSelection('gorilla'));
-
-        let hedgehog = this.add.image(400, 290, 'hedgehog').setScale(0.35);
-        hedgehog.setInteractive();
-        hedgehog.on('pointerdown', () => handleCharacterSelection('hedgehog'));
-
-        let honeybee = this.add.image(500, 290, 'honeybee').setScale(0.35);
-        honeybee.setInteractive();
-        honeybee.on('pointerdown', () => handleCharacterSelection('honeybee'));
-
-        let monkey = this.add.image(150, 400, 'monkey').setScale(0.35);
-        monkey.setInteractive();
-        monkey.on('pointerdown', () => handleCharacterSelection('monkey'));
-
-        let pig = this.add.image(250, 400, 'pig').setScale(0.35);
-        pig.setInteractive();
-        pig.on('pointerdown', () => handleCharacterSelection('pig'));
-
-        let rabbit = this.add.image(350, 400, 'rabbit').setScale(0.35);
-        rabbit.setInteractive();
-        rabbit.on('pointerdown', () => handleCharacterSelection('rabbit'));
-
-        let tiger = this.add.image(450, 400, 'tiger').setScale(0.35);
-        tiger.setInteractive();
-        tiger.on('pointerdown', () => handleCharacterSelection('tiger'));
+        characterPositions.forEach(charInfo => {
+            const image = this.add.image(charInfo.x, charInfo.y, charInfo.key).setScale(0.35);
+            image.setInteractive();
+            image.on('pointerdown', () => handleCharacterSelection(charInfo.key, image));
+        });
 
         const instructionsButton = this.add.image(300, 520, 'instructions')
             .setScale(0.350)
@@ -271,7 +222,11 @@ class HomeScene extends Phaser.Scene {
 
             // Handle button click to start the level
             circle.on('pointerdown', () => {
-                this.scene.start(level.key);
+                if (this.game.global.selectedCharacterKey) {
+                    this.scene.start(level.key);
+                } else {
+                    alert("Please choose a character before playing the game! Thank you.");
+                }
             });
         });
 
@@ -304,23 +259,102 @@ class Level1 extends Phaser.Scene {
         this.load.image('threenotes', './assets/musicnoteonne.png');
     }
     create() {
-        //this.physics.startSystem(Phaser.Physics.ARCADE);
-
         this.add.sprite(0,0,'sky').setScale(2);
-        this.add.sprite(90,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(180,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(270,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(360,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(450,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(540,547,'ground').setScale(0.5,0.75);
+
+        const platforms = this.physics.add.staticGroup();
+
+        platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(180,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(270,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(360,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(450,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(540,547,'ground').setScale(0.5,0.75).refreshBody();
+
+        const chosenAnimalKey = this.game.global.selectedCharacterKey;
+        let player;
+        switch (chosenAnimalKey) {
+            case 'chick':
+                player = this.add.sprite(50, 465, 'chick').setScale(0.25);
+                break;
+            case 'blackcat':
+                player = this.add.sprite(50, 465, 'blackcat').setScale(0.25);
+                break;
+            case 'lightcat':
+                player = this.add.sprite(50, 465, 'lightcat').setScale(0.25);
+                break;
+            case 'chipmunk':
+                player = this.add.sprite(50, 465, 'chipmunk').setScale(0.25);
+                break;
+            case 'cow':
+                player = this.add.sprite(50, 465, 'cow').setScale(0.25);
+                break;
+            case 'dog':
+                player = this.add.sprite(50, 465, 'dog').setScale(0.25);
+                break;
+            case 'poodle':
+                player = this.add.sprite(50, 465, 'poodle').setScale(0.25);
+                break;
+            case 'gorilla':
+                player = this.add.sprite(50, 465, 'gorilla').setScale(0.25);
+                break;
+            case 'hedgehog':
+                player = this.add.sprite(50, 465, 'hedgehog').setScale(0.25);
+                break;
+            case 'honeybee':
+                player = this.add.sprite(50, 465, 'honeybee').setScale(0.25);
+                break;
+            case 'monkey':
+                player = this.add.sprite(50, 465, 'monkey').setScale(0.25);
+                break;
+            case 'pig':
+                player = this.add.sprite(50, 465, 'pig').setScale(0.25);
+                break;
+            case 'rabbit':
+                player = this.add.sprite(50, 465, 'rabbit').setScale(0.25);
+                break;
+            case 'tiger':
+                player = this.add.sprite(50, 465, 'tiger').setScale(0.25);
+                break;
+        }
+
+        this.physics.world.enable(player);
+
+        player.body.bounce.y = 0.2;
+        player.body.gravity.y = 800;
+        player.body.collideWorldBounds = true;
+        this.physics.add.collider(player, platforms);
+        this.cursors = this.input.keyboard.createCursorKeys();
 
         // "Back to Home" button
-        const homeButton = this.add.image(300, 500, 'home')
+        const homeButton = this.add.image(300, 560, 'home')
         .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
                 this.scene.start("HomeScene");
             });
+
+        this.player = player;
+
+    }
+    update() {
+        const player = this.player;
+        if (!player) return;
+
+        player.body.velocity.x = 0;
+
+        // Handle left and right movement
+        if (this.cursors.left.isDown) {
+            player.body.velocity.x = -300;
+            player.flipX = false;
+        } else if (this.cursors.right.isDown) {
+            player.body.velocity.x = 300;
+            player.flipX = true;
+        }
+
+        // Handle jumping
+        if (this.cursors.up.isDown && player.body.touching.down) {
+            player.body.velocity.y = -600;
+        }
     }
 }
 
@@ -338,19 +372,100 @@ class Level2 extends Phaser.Scene {
     }
     create() {
         this.add.sprite(0,0,'sky').setScale(2);
-        this.add.sprite(90,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(180,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(270,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(360,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(450,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(540,547,'ground').setScale(0.5,0.75);
+
+        const platforms = this.physics.add.staticGroup();
+
+        platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(180,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(270,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(360,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(450,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(540,547,'ground').setScale(0.5,0.75).refreshBody();
+
+        const chosenAnimalKey = this.game.global.selectedCharacterKey;
+        let player;
+        switch (chosenAnimalKey) {
+            case 'chick':
+                player = this.add.sprite(50, 465, 'chick').setScale(0.25);
+                break;
+            case 'blackcat':
+                player = this.add.sprite(50, 465, 'blackcat').setScale(0.25);
+                break;
+            case 'lightcat':
+                player = this.add.sprite(50, 465, 'lightcat').setScale(0.25);
+                break;
+            case 'chipmunk':
+                player = this.add.sprite(50, 465, 'chipmunk').setScale(0.25);
+                break;
+            case 'cow':
+                player = this.add.sprite(50, 465, 'cow').setScale(0.25);
+                break;
+            case 'dog':
+                player = this.add.sprite(50, 465, 'dog').setScale(0.25);
+                break;
+            case 'poodle':
+                player = this.add.sprite(50, 465, 'poodle').setScale(0.25);
+                break;
+            case 'gorilla':
+                player = this.add.sprite(50, 465, 'gorilla').setScale(0.25);
+                break;
+            case 'hedgehog':
+                player = this.add.sprite(50, 465, 'hedgehog').setScale(0.25);
+                break;
+            case 'honeybee':
+                player = this.add.sprite(50, 465, 'honeybee').setScale(0.25);
+                break;
+            case 'monkey':
+                player = this.add.sprite(50, 465, 'monkey').setScale(0.25);
+                break;
+            case 'pig':
+                player = this.add.sprite(50, 465, 'pig').setScale(0.25);
+                break;
+            case 'rabbit':
+                player = this.add.sprite(50, 465, 'rabbit').setScale(0.25);
+                break;
+            case 'tiger':
+                player = this.add.sprite(50, 465, 'tiger').setScale(0.25);
+                break;
+        }
+
+        this.physics.world.enable(player);
+
+        player.body.bounce.y = 0.2;
+        player.body.gravity.y = 800;
+        player.body.collideWorldBounds = true;
+        this.physics.add.collider(player, platforms);
+        this.cursors = this.input.keyboard.createCursorKeys();
+
         // "Back to Home" button
-        const homeButton = this.add.image(300, 500, 'home')
+        const homeButton = this.add.image(300, 560, 'home')
         .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
                 this.scene.start("HomeScene");
             });
+
+            this.player = player;
+    }
+    update() {
+        const player = this.player;
+        if (!player) return;
+
+        player.body.velocity.x = 0;
+
+        // Handle left and right movement
+        if (this.cursors.left.isDown) {
+            player.body.velocity.x = -300;
+            player.flipX = false;
+        } else if (this.cursors.right.isDown) {
+            player.body.velocity.x = 300;
+            player.flipX = true;
+        }
+
+        // Handle jumping
+        if (this.cursors.up.isDown && player.body.touching.down) {
+            player.body.velocity.y = -600;
+        }
     }
 }
 
@@ -368,19 +483,101 @@ class Level3 extends Phaser.Scene {
     }
     create() {
         this.add.sprite(0,0,'sky').setScale(2);
-        this.add.sprite(90,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(180,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(270,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(360,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(450,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(540,547,'ground').setScale(0.5,0.75);
+
+        const platforms = this.physics.add.staticGroup();
+
+        platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(180,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(270,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(360,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(450,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(540,547,'ground').setScale(0.5,0.75).refreshBody();
+
+        const chosenAnimalKey = this.game.global.selectedCharacterKey;
+        let player;
+        switch (chosenAnimalKey) {
+            case 'chick':
+                player = this.add.sprite(50, 465, 'chick').setScale(0.25);
+                break;
+            case 'blackcat':
+                player = this.add.sprite(50, 465, 'blackcat').setScale(0.25);
+                break;
+            case 'lightcat':
+                player = this.add.sprite(50, 465, 'lightcat').setScale(0.25);
+                break;
+            case 'chipmunk':
+                player = this.add.sprite(50, 465, 'chipmunk').setScale(0.25);
+                break;
+            case 'cow':
+                player = this.add.sprite(50, 465, 'cow').setScale(0.25);
+                break;
+            case 'dog':
+                player = this.add.sprite(50, 465, 'dog').setScale(0.25);
+                break;
+            case 'poodle':
+                player = this.add.sprite(50, 465, 'poodle').setScale(0.25);
+                break;
+            case 'gorilla':
+                player = this.add.sprite(50, 465, 'gorilla').setScale(0.25);
+                break;
+            case 'hedgehog':
+                player = this.add.sprite(50, 465, 'hedgehog').setScale(0.25);
+                break;
+            case 'honeybee':
+                player = this.add.sprite(50, 465, 'honeybee').setScale(0.25);
+                break;
+            case 'monkey':
+                player = this.add.sprite(50, 465, 'monkey').setScale(0.25);
+                break;
+            case 'pig':
+                player = this.add.sprite(50, 465, 'pig').setScale(0.25);
+                break;
+            case 'rabbit':
+                player = this.add.sprite(50, 465, 'rabbit').setScale(0.25);
+                break;
+            case 'tiger':
+                player = this.add.sprite(50, 465, 'tiger').setScale(0.25);
+                break;
+        }
+
+        this.physics.world.enable(player);
+
+        player.body.bounce.y = 0.2;
+        player.body.gravity.y = 800;
+        player.body.collideWorldBounds = true;
+        this.physics.add.collider(player, platforms);
+        this.cursors = this.input.keyboard.createCursorKeys();
+
         // "Back to Home" button
-        const homeButton = this.add.image(300, 500, 'home')
+        const homeButton = this.add.image(300, 560, 'home')
         .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
                 this.scene.start("HomeScene");
             });
+
+        this.player = player;
+
+    }
+    update() {
+        const player = this.player;
+        if (!player) return;
+
+        player.body.velocity.x = 0;
+
+        // Handle left and right movement
+        if (this.cursors.left.isDown) {
+            player.body.velocity.x = -300;
+            player.flipX = false;
+        } else if (this.cursors.right.isDown) {
+            player.body.velocity.x = 300;
+            player.flipX = true;
+        }
+
+        // Handle jumping
+        if (this.cursors.up.isDown && player.body.touching.down) {
+            player.body.velocity.y = -600;
+        }
     }
 }
 
@@ -398,19 +595,101 @@ class Level4 extends Phaser.Scene {
     }
     create() {
         this.add.sprite(0,0,'sky').setScale(2);
-        this.add.sprite(90,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(180,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(270,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(360,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(450,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(540,547,'ground').setScale(0.5,0.75);
+
+        const platforms = this.physics.add.staticGroup();
+
+        platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(180,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(270,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(360,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(450,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(540,547,'ground').setScale(0.5,0.75).refreshBody();
+
+        const chosenAnimalKey = this.game.global.selectedCharacterKey;
+        let player;
+        switch (chosenAnimalKey) {
+            case 'chick':
+                player = this.add.sprite(50, 465, 'chick').setScale(0.25);
+                break;
+            case 'blackcat':
+                player = this.add.sprite(50, 465, 'blackcat').setScale(0.25);
+                break;
+            case 'lightcat':
+                player = this.add.sprite(50, 465, 'lightcat').setScale(0.25);
+                break;
+            case 'chipmunk':
+                player = this.add.sprite(50, 465, 'chipmunk').setScale(0.25);
+                break;
+            case 'cow':
+                player = this.add.sprite(50, 465, 'cow').setScale(0.25);
+                break;
+            case 'dog':
+                player = this.add.sprite(50, 465, 'dog').setScale(0.25);
+                break;
+            case 'poodle':
+                player = this.add.sprite(50, 465, 'poodle').setScale(0.25);
+                break;
+            case 'gorilla':
+                player = this.add.sprite(50, 465, 'gorilla').setScale(0.25);
+                break;
+            case 'hedgehog':
+                player = this.add.sprite(50, 465, 'hedgehog').setScale(0.25);
+                break;
+            case 'honeybee':
+                player = this.add.sprite(50, 465, 'honeybee').setScale(0.25);
+                break;
+            case 'monkey':
+                player = this.add.sprite(50, 465, 'monkey').setScale(0.25);
+                break;
+            case 'pig':
+                player = this.add.sprite(50, 465, 'pig').setScale(0.25);
+                break;
+            case 'rabbit':
+                player = this.add.sprite(50, 465, 'rabbit').setScale(0.25);
+                break;
+            case 'tiger':
+                player = this.add.sprite(50, 465, 'tiger').setScale(0.25);
+                break;
+        }
+
+        this.physics.world.enable(player);
+
+        player.body.bounce.y = 0.2;
+        player.body.gravity.y = 800;
+        player.body.collideWorldBounds = true;
+        this.physics.add.collider(player, platforms);
+        this.cursors = this.input.keyboard.createCursorKeys();
+
         // "Back to Home" button
-        const homeButton = this.add.image(300, 500, 'home')
+        const homeButton = this.add.image(300, 560, 'home')
         .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
                 this.scene.start("HomeScene");
             });
+
+        this.player = player;
+
+    }
+    update() {
+        const player = this.player;
+        if (!player) return;
+
+        player.body.velocity.x = 0;
+
+        // Handle left and right movement
+        if (this.cursors.left.isDown) {
+            player.body.velocity.x = -300;
+            player.flipX = false;
+        } else if (this.cursors.right.isDown) {
+            player.body.velocity.x = 300;
+            player.flipX = true;
+        }
+
+        // Handle jumping
+        if (this.cursors.up.isDown && player.body.touching.down) {
+            player.body.velocity.y = -600;
+        }
     }
 }
 
@@ -428,19 +707,101 @@ class Level5 extends Phaser.Scene {
     }
     create() {
         this.add.sprite(0,0,'sky').setScale(2);
-        this.add.sprite(90,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(180,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(270,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(360,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(450,547,'ground').setScale(0.5,0.75);
-        this.add.sprite(540,547,'ground').setScale(0.5,0.75);
+
+        const platforms = this.physics.add.staticGroup();
+
+        platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(180,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(270,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(360,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(450,547,'ground').setScale(0.5,0.75).refreshBody();
+        platforms.create(540,547,'ground').setScale(0.5,0.75).refreshBody();
+
+        const chosenAnimalKey = this.game.global.selectedCharacterKey;
+        let player;
+        switch (chosenAnimalKey) {
+            case 'chick':
+                player = this.add.sprite(50, 465, 'chick').setScale(0.25);
+                break;
+            case 'blackcat':
+                player = this.add.sprite(50, 465, 'blackcat').setScale(0.25);
+                break;
+            case 'lightcat':
+                player = this.add.sprite(50, 465, 'lightcat').setScale(0.25);
+                break;
+            case 'chipmunk':
+                player = this.add.sprite(50, 465, 'chipmunk').setScale(0.25);
+                break;
+            case 'cow':
+                player = this.add.sprite(50, 465, 'cow').setScale(0.25);
+                break;
+            case 'dog':
+                player = this.add.sprite(50, 465, 'dog').setScale(0.25);
+                break;
+            case 'poodle':
+                player = this.add.sprite(50, 465, 'poodle').setScale(0.25);
+                break;
+            case 'gorilla':
+                player = this.add.sprite(50, 465, 'gorilla').setScale(0.25);
+                break;
+            case 'hedgehog':
+                player = this.add.sprite(50, 465, 'hedgehog').setScale(0.25);
+                break;
+            case 'honeybee':
+                player = this.add.sprite(50, 465, 'honeybee').setScale(0.25);
+                break;
+            case 'monkey':
+                player = this.add.sprite(50, 465, 'monkey').setScale(0.25);
+                break;
+            case 'pig':
+                player = this.add.sprite(50, 465, 'pig').setScale(0.25);
+                break;
+            case 'rabbit':
+                player = this.add.sprite(50, 465, 'rabbit').setScale(0.25);
+                break;
+            case 'tiger':
+                player = this.add.sprite(50, 465, 'tiger').setScale(0.25);
+                break;
+        }
+
+        this.physics.world.enable(player);
+
+        player.body.bounce.y = 0.2;
+        player.body.gravity.y = 800;
+        player.body.collideWorldBounds = true;
+        this.physics.add.collider(player, platforms);
+        this.cursors = this.input.keyboard.createCursorKeys();
+
         // "Back to Home" button
-        const homeButton = this.add.image(300, 500, 'home')
+        const homeButton = this.add.image(300, 560, 'home')
         .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
                 this.scene.start("HomeScene");
             });
+
+        this.player = player;
+
+    }
+    update() {
+        const player = this.player;
+        if (!player) return;
+
+        player.body.velocity.x = 0;
+
+        // Handle left and right movement
+        if (this.cursors.left.isDown) {
+            player.body.velocity.x = -300;
+            player.flipX = false;
+        } else if (this.cursors.right.isDown) {
+            player.body.velocity.x = 300;
+            player.flipX = true;
+        }
+
+        // Handle jumping
+        if (this.cursors.up.isDown && player.body.touching.down) {
+            player.body.velocity.y = -600;
+        }
     }
 }
 
@@ -493,7 +854,15 @@ const config = {
     type: Phaser.AUTO,
     width: 612,
     height: 598,
-    scene: [StartScene, CreditsScene, CharacterScene, InstructionScene, HomeScene, Level1, Level2, Level3, Level4, Level5, SettingScene]
+    scene: [StartScene, CreditsScene, CharacterScene, InstructionScene, HomeScene, Level1, Level2, Level3, Level4, Level5, SettingScene],
+    physics: { // Add this physics configuration
+        default: 'arcade', // Use the Arcade Physics system
+        arcade: {
+            gravity: { y: 0 },
+            debug: false
+        }
+    }
 };
 
 const game = new Phaser.Game(config);
+game.global = { selectedCharacterKey: null };
