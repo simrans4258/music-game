@@ -68,6 +68,9 @@
 - [ ] Automate notification of API limit to make sure I don’t exceed free quota
 - [ ] A multiple choice quizzer that will test the user’s knowledge of the solution
 
+* restart the whole level if the player answers the question wrong
+* if the player finish certain levels, the character scene unlocks some characters
+
 -->
 
 
