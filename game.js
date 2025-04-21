@@ -686,7 +686,7 @@ class Level2 extends Phaser.Scene {
             }
 
             if (this.score === 200) {
-                alert('You win! Here is 1 minute of pop music.')
+                alert('You win! Here is 30 seconds of music.')
                 this.score = 0
                 this.prizeSound.play();
                 this.musicPlaying = true;
@@ -972,6 +972,8 @@ class Level4 extends Phaser.Scene {
         this.load.audio('prizeMusic', './assets/house.mp3');
     }
     create() {
+        this.score = 0; // Reset the score when the level starts
+        this.obstacleActive = true; // Reset the obstacle flag
         this.add.sprite(0,0,'sky').setScale(2);
 
         const platforms = this.physics.add.staticGroup();
@@ -1144,7 +1146,7 @@ class Level4 extends Phaser.Scene {
         }
 
         if (this.score === 400) {
-            alert('You win! Here is 1 minute of pop music.')
+            alert('You win! Here is 1 minute and 23 seconds of music.')
             this.score = 0
             this.prizeSound.play();
             this.musicPlaying = true;
@@ -1187,6 +1189,8 @@ class Level5 extends Phaser.Scene {
         this.load.audio('prizeMusic', './assets/rnb.mp3');
     }
     create() {
+        this.score = 0; // Reset the score when the level starts
+        this.obstacleActive = true; // Reset the obstacle flag
         this.add.sprite(0,0,'sky').setScale(2);
 
         const platforms = this.physics.add.staticGroup();
@@ -1359,7 +1363,7 @@ class Level5 extends Phaser.Scene {
         }
 
         if (this.score === 100) {
-            alert('You win! Here is 1 minute of pop music.')
+            alert('You win! Here is 1 minute and 13 seconds of music.')
             this.score = 0
             this.prizeSound.play();
             this.musicPlaying = true;
