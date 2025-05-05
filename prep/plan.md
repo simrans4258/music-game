@@ -17,25 +17,28 @@
 - [x] input backgrounds/sprites/images into the game (Nancy)
 
 (February 24-March 9)
-- [] making javascript commands for buttons (Nancy)
-- [] figuring out how to correlate the audio with the buttons (Nancy & Simran)
+- [x] making javascript commands for buttons (Nancy)
+- [x] figuring out how to correlate the audio with the buttons (Nancy & Simran)
 
 (March 10-23)
-- [] create math questions (obstacles for the game), if the answer is correct, obstacle is removed (Nancy & Simran)
-- [] when user misses a certain amount of beats, game over (Simran)
+- [x] create math questions (obstacles for the game), if the answer is correct, obstacle is removed (Nancy & Simran)
+- [x] when user misses a certain amount of beats, game over (Simran)
 
 (March 24-31)
-- [] give an alert to the player that "game is over" and make a button to back home to play again (Nancy & Simran)
-
-#### Beyond MVP
+- [x] give an alert to the player that "game is over" and make a button to back home to play again (Nancy & Simran)
 
 (April 1-12)
-- [] make the game 3D (Nancy & Simran)
-- [] draw out sprites/backgrounds if we have enough time (Nancy & Simran)
+- [x] make the game 3D (Nancy & Simran)
+- [x] draw out sprites/backgrounds if we have enough time (Nancy & Simran)
 
 (April 13-20)
-- [] check through any bugs in code (Nancy & Simran)
-- [] finish up any codes (Nancy & Simran)
+- [x] check through any bugs in code (Nancy & Simran)
+- [x] finish up any codes (Nancy & Simran)
+
+Beyond MVP:
+* changing the levels (how the player interacts throughout the level)
+* making the home button throughout the level (in case the player wants to exit out of the level & he/she want to choose another level)
+* edit instructions (click up arrow to jump)
 
 #### Instructions for game
 - use arrow keys to move
