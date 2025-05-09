@@ -36,9 +36,9 @@
 - [x] finish up any codes (Nancy & Simran)
 
 Beyond MVP:
-* changing the levels (how the player interacts throughout the level)
-* making the home button throughout the level (in case the player wants to exit out of the level & he/she want to choose another level)
-* edit instructions (click up arrow to jump)
+- [] changing the levels (how the player interacts throughout the level)
+- [] making the home button throughout the level (in case the player wants to exit out of the level & he/she want to choose another level)
+- [x] edit instructions (click up arrow to jump)
 
 #### Instructions for game
 - use arrow keys to move

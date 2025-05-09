@@ -35,7 +35,7 @@ class CreditsScene extends Phaser.Scene {
         this.add.text(225, 150, "Made By", {fontFamily: 'Nunito', stroke: '#000000', strokeThickness: 1.9, fontSize: "40px", fill: "black" });
         this.add.text(165, 250, "🎵 Nancy Chen 🎵", {fontFamily: 'Nunito', fontSize: "30px", fill: "black" });
         this.add.text(145, 350, "🎵 Simran Sayeed 🎵", {fontFamily: 'Nunito', fontSize: "30px", fill: "black" });
-        //width: 612, height: 598,
+
         const button = this.add.text(125, 450, 'Character Options', {
             fontFamily: 'Nunito',
             fontSize: '40px',
@@ -74,6 +74,7 @@ class CharacterScene extends Phaser.Scene {
         this.load.image("tiger", "assets/tiger_3d.png");
     }
     create() {
+        this.fonts.add('Nunito');
         this.add.image(612, 598, "charactersBg").setScale(1);
 
         const characterPositions = [
@@ -441,6 +442,14 @@ class Level1 extends Phaser.Scene {
             player.body.velocity.y = -450;
         }
 
+        // "Back to Home" button
+        const homeButton = this.add.image(300, 560, 'home')
+        .setScale(0.50)
+        .setInteractive()
+        .on("pointerdown", () => {
+            this.scene.start("HomeScene");
+        });
+
         if (this.score === 100) {
             alert('You win! Here is 1 minute of music.')
             this.score = 0
@@ -450,15 +459,6 @@ class Level1 extends Phaser.Scene {
             // Set up an event to trigger after the music finishes
             this.prizeSound.once('complete', () => {
                 alert("Click HOME & choose another level & have more fun with math & music!");
-
-                // "Back to Home" button
-                const homeButton = this.add.image(300, 560, 'home')
-                .setScale(0.50)
-                .setInteractive()
-                .on("pointerdown", () => {
-                    this.scene.start("HomeScene");
-                });
-
             });
         }
 
@@ -685,6 +685,14 @@ class Level2 extends Phaser.Scene {
                 player.body.velocity.y = -450;
             }
 
+            // "Back to Home" button
+            const homeButton = this.add.image(300, 560, 'home')
+            .setScale(0.50)
+            .setInteractive()
+            .on("pointerdown", () => {
+                this.scene.start("HomeScene");
+            });
+
             if (this.score === 200) {
                 alert('You win! Here is 30 seconds of music.')
                 this.score = 0
@@ -694,15 +702,6 @@ class Level2 extends Phaser.Scene {
                 // Set up an event to trigger after the music finishes
                 this.prizeSound.once('complete', () => {
                     alert("Click HOME & choose another level & have more fun with math & music!");
-
-                    // "Back to Home" button
-                    const homeButton = this.add.image(300, 560, 'home')
-                        .setScale(0.50)
-                        .setInteractive()
-                        .on("pointerdown", () => {
-                            this.scene.start("HomeScene");
-                        });
-
                 });
             }
 
@@ -930,6 +929,14 @@ class Level3 extends Phaser.Scene {
             player.body.velocity.y = -550;
         }
 
+        // "Back to Home" button
+        const homeButton = this.add.image(300, 560, 'home')
+        .setScale(0.50)
+        .setInteractive()
+        .on("pointerdown", () => {
+            this.scene.start("HomeScene");
+        });
+
         if (this.score === 300) {
             alert('You win! Here is 33 seconds of music.')
             this.score = 0
@@ -939,14 +946,6 @@ class Level3 extends Phaser.Scene {
             // Set up an event to trigger after the music finishes
             this.prizeSound.once('complete', () => {
                 alert("Click HOME & choose another level & have more fun with math & music!");
-
-                // "Back to Home" button
-                const homeButton = this.add.image(300, 560, 'home')
-                    .setScale(0.50)
-                    .setInteractive()
-                    .on("pointerdown", () => {
-                        this.scene.start("HomeScene");
-                    });
             });
         }
     }
@@ -1145,6 +1144,14 @@ class Level4 extends Phaser.Scene {
             player.body.velocity.y = -450;
         }
 
+        // "Back to Home" button
+        const homeButton = this.add.image(300, 560, 'home')
+        .setScale(0.50)
+        .setInteractive()
+        .on("pointerdown", () => {
+            this.scene.start("HomeScene");
+        });
+
         if (this.score === 400) {
             alert('You win! Here is 1 minute and 23 seconds of music.')
             this.score = 0
@@ -1154,15 +1161,6 @@ class Level4 extends Phaser.Scene {
             // Set up an event to trigger after the music finishes
             this.prizeSound.once('complete', () => {
                 alert("Click HOME & choose another level & have more fun with math & music!");
-
-                // "Back to Home" button
-                const homeButton = this.add.image(300, 560, 'home')
-                .setScale(0.50)
-                .setInteractive()
-                .on("pointerdown", () => {
-                    this.scene.start("HomeScene");
-                });
-
             });
         }
 
@@ -1362,6 +1360,14 @@ class Level5 extends Phaser.Scene {
             player.body.velocity.y = -450;
         }
 
+        // "Back to Home" button
+        const homeButton = this.add.image(300, 560, 'home')
+        .setScale(0.50)
+        .setInteractive()
+        .on("pointerdown", () => {
+            this.scene.start("HomeScene");
+        });
+
         if (this.score === 100) {
             alert('You win! Here is 1 minute and 13 seconds of music.')
             this.score = 0
@@ -1371,15 +1377,6 @@ class Level5 extends Phaser.Scene {
             // Set up an event to trigger after the music finishes
             this.prizeSound.once('complete', () => {
                 alert("Click HOME & choose another level & have more fun with math & music!");
-
-                // "Back to Home" button
-                const homeButton = this.add.image(300, 560, 'home')
-                .setScale(0.50)
-                .setInteractive()
-                .on("pointerdown", () => {
-                    this.scene.start("HomeScene");
-                });
-
             });
         }
 
