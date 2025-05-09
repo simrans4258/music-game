@@ -147,7 +147,7 @@ class InstructionScene extends Phaser.Scene {
         this.add.text(50, 150, "Go to the Settings to change volume of the music", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
         this.add.text(50, 200, "Match your commands to the beat of the music", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
         this.add.text(50, 250, "Solve math problems to avoid obstacles", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
-        this.add.text(50, 300, "If you miss a beat/obstacle, it is game over", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
+        this.add.text(50, 300, "If you get the math question wrong, you can try again by touching the obstacle again.", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
         this.add.text(50, 350, "Get through all the obstacles", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
         this.add.text(50, 400, "Match the beats to win the game!", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
         this.add.text(50, 450, "Good luck & have fun!", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
