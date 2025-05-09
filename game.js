@@ -27,14 +27,20 @@ class CreditsScene extends Phaser.Scene {
     preload() {
         this.load.image("creditsBg", "assets/peachpuffbg.png"); // Load credits background
         this.load.image("options", "assets/options.jpg"); // Load button
+        this.load.image("icon", "assets/pinkicon.png"); // Load button
     }
     create() {
         this.add.image(612, 598, "creditsBg").setScale(1); // Set background image
 
+        this.add.image(180, 265, "icon").setScale(0.15);
+        this.add.image(420, 265, "icon").setScale(0.15);
+        this.add.image(160, 365, "icon").setScale(0.15);
+        this.add.image(440, 365, "icon").setScale(0.15);
+
         this.add.text(225, 50, "Credits", {fontFamily: 'Nunito', stroke: '#000000', strokeThickness: 1.9, fontSize: '50px', fill: 'black'});
         this.add.text(225, 150, "Made By", {fontFamily: 'Nunito', stroke: '#000000', strokeThickness: 1.9, fontSize: "40px", fill: "black" });
-        this.add.text(165, 250, "🎵 Nancy Chen 🎵", {fontFamily: 'Nunito', fontSize: "30px", fill: "black" });
-        this.add.text(145, 350, "🎵 Simran Sayeed 🎵", {fontFamily: 'Nunito', fontSize: "30px", fill: "black" });
+        this.add.text(220, 250, "Nancy Chen", {fontFamily: 'Nunito', fontSize: "30px", fill: "black" });
+        this.add.text(200, 350, "Simran Sayeed", {fontFamily: 'Nunito', fontSize: "30px", fill: "black" });
 
         const button = this.add.text(125, 450, 'Character Options', {
             fontFamily: 'Nunito',
@@ -74,7 +80,6 @@ class CharacterScene extends Phaser.Scene {
         this.load.image("tiger", "assets/tiger_3d.png");
     }
     create() {
-        this.fonts.add('Nunito');
         this.add.image(612, 598, "charactersBg").setScale(1);
 
         const characterPositions = [
@@ -138,8 +143,8 @@ class InstructionScene extends Phaser.Scene {
     create() {
         this.add.image(612, 598, "instructionsBg").setScale(1); // Set background image
         this.add.text(25, 25, "Game Instructions", {fontFamily: 'Nunito',stroke: '#000000', strokeThickness: 1.5, fontSize: "35px", fill: "black" });
-        this.add.text(50, 100, "Use arrow keys to move", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
-        this.add.text(50, 150, "Use SPACE bar to jump", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
+        this.add.text(50, 100, "Use arrow keys to move, Use up arrow to jump", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
+        this.add.text(50, 150, "Go to the Settings to change volume of the music", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
         this.add.text(50, 200, "Match your commands to the beat of the music", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
         this.add.text(50, 250, "Solve math problems to avoid obstacles", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
         this.add.text(50, 300, "If you miss a beat/obstacle, it is game over", {fontFamily: 'Nunito', fontSize: "23px", fill: "black" });
@@ -297,7 +302,7 @@ class Level1 extends Phaser.Scene {
         this.placeNotesOnFloor(550, 400, floor);
 
         // Create the red obstacle
-        this.obstacle = this.physics.add.sprite(285, 390, 'redObstacle').setScale(0.15,2);
+        this.obstacle = this.physics.add.sprite(285, 220, 'redObstacle').setScale(0.15,1);
         this.obstacle.setImmovable(true);
         this.obstacle.setActive(true).setVisible(true); // Ensure the obstacle is active and visible
         this.physics.world.enableBody(this.obstacle); // Re-enable the physics body
