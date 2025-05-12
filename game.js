@@ -1313,112 +1313,80 @@ class Level5 extends Phaser.Scene {
         super("Level5");
         this.score = 0; // Initialize the score
         this.scoreText = null; // Variable to hold the score text object
-        this.obstacle = null; // To hold the red obstacle
-        this.obstacleActive = true;
+        this.obstacles = []; // Array to hold the obstacles
+        this.obstacleActive = [true, true, true, true, true];
+        this.notesGroup = null; // Group for the musical notes
     }
+
     preload() {
         this.load.image("home", "assets/home.png"); // Load home button
         this.load.image('sky', './assets/sky.png');
         this.load.image('ground', './assets/platform2.jpg');
         this.load.image('groundOne', './assets/platform.png');
         this.load.image('onenote', './assets/musicalnotesone.png'); // Singular note
-        this.load.image('threenotes', './assets/musicnoteonne.png'); // Plural notes
-        this.load.image('redObstacle', './assets/obstacle.png'); // Load the red obstacle image
-        this.load.audio('prizeMusic', './assets/rnb.mp3');
+        this.load.image('obstacle5', './assets/obstacle.png'); // Load the obstacle image
+        this.load.audio('prizeMusic', './assets/rnb.mp3'); // Level 5 music
     }
+
     create() {
         this.score = 0; // Reset the score when the level starts
-        this.obstacleActive = true; // Reset the obstacle flag
-        this.add.sprite(0,0,'sky').setScale(2);
+        this.obstacleActive = [true, true, true, true, true]; // Reset obstacle flags
+        this.add.sprite(0, 0, 'sky').setScale(2);
 
         const platforms = this.physics.add.staticGroup();
         const floor = this.physics.add.staticGroup();
-        const notes = this.physics.add.group(); // Create a group for the musical notes
-        this.notes = notes; // Store the notes group in the scene
+        this.notesGroup = this.physics.add.group(); // Create a group for the musical notes
+        this.notes = []; // Keep a reference to individual note sprites if needed
 
-        // Create the ground platforms
-        platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
-        platforms.create(180,547,'ground').setScale(0.5,0.75).refreshBody();
-        platforms.create(270,547,'ground').setScale(0.5,0.75).refreshBody();
-        platforms.create(360,547,'ground').setScale(0.5,0.75).refreshBody();
-        platforms.create(450,547,'ground').setScale(0.5,0.75).refreshBody();
-        platforms.create(540,547,'ground').setScale(0.5,0.75).refreshBody();
+        // Create the ground platforms (same spacing as Level 1 & 3)
+        platforms.create(90, 547, 'ground').setScale(0.5, 0.75).refreshBody();
+        platforms.create(180, 547, 'ground').setScale(0.5, 0.75).refreshBody();
+        platforms.create(270, 547, 'ground').setScale(0.5, 0.75).refreshBody();
+        platforms.create(360, 547, 'ground').setScale(0.5, 0.75).refreshBody();
+        platforms.create(450, 547, 'ground').setScale(0.5, 0.75).refreshBody();
+        platforms.create(540, 547, 'ground').setScale(0.5, 0.75).refreshBody();
 
-        // Create the green floors and place notes on them
-        floor.create(25,175,'groundOne').setScale(1).refreshBody();
-        this.placeNotesOnFloor(25, 175, floor);
-        floor.create(25,325,'groundOne').setScale(1).refreshBody();
-        this.placeNotesOnFloor(25, 325, floor);
-        floor.create(550,100,'groundOne').setScale(1).refreshBody();
-        this.placeNotesOnFloor(550, 100, floor);
-        floor.create(550,250,'groundOne').setScale(1).refreshBody();
-        this.placeNotesOnFloor(550, 250, floor);
-        floor.create(550,400,'groundOne').setScale(1).refreshBody();
-        this.placeNotesOnFloor(550, 400, floor);
+        // Create the green floors and place initial notes (similar spacing to Level 1 & 3)
+        floor.create(25, 100, 'groundOne').setScale(1).refreshBody();
+        this.placeInitialNotesOnFloor(25, 100, floor);
 
-        // Create the red obstacle
-        this.obstacle = this.physics.add.sprite(285, 390, 'redObstacle').setScale(0.15,2);
-        this.obstacle.setImmovable(true);
+        floor.create(25, 250, 'groundOne').setScale(1).refreshBody();
+        this.placeInitialNotesOnFloor(25, 250, floor);
+
+        floor.create(550, 100, 'groundOne').setScale(1).refreshBody();
+        this.placeInitialNotesOnFloor(550, 100, floor);
+
+        floor.create(550, 250, 'groundOne').setScale(1).refreshBody();
+        this.placeInitialNotesOnFloor(550, 250, floor);
+
+        floor.create(300, 400, 'groundOne').setScale(1).refreshBody(); // Added a fifth floor
+        this.placeInitialNotesOnFloor(300, 400, floor);
+
+        // Create the 5 obstacles
+        this.obstacles[0] = this.physics.add.sprite(150, 70, 'obstacle5').setScale(0.1, 1).setImmovable(true);
+        this.obstacles[1] = this.physics.add.sprite(450, 70, 'obstacle5').setScale(0.1, 1).setImmovable(true);
+        this.obstacles[2] = this.physics.add.sprite(150, 220, 'obstacle5').setScale(0.1, 1).setImmovable(true);
+        this.obstacles[3] = this.physics.add.sprite(450, 220, 'obstacle5').setScale(0.1, 1).setImmovable(true);
+        this.obstacles[4] = this.physics.add.sprite(300, 350, 'obstacle5').setScale(0.1, 1).setImmovable(true);
 
         const chosenAnimalKey = this.game.global.selectedCharacterKey;
         let player;
+        // Player sprite creation (same as previous levels)
         switch (chosenAnimalKey) {
-            case 'chick':
-                player = this.add.sprite(30, 465, 'chick').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'blackcat':
-                player = this.add.sprite(30, 465, 'blackcat').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'lightcat':
-                player = this.add.sprite(30, 465, 'lightcat').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'chipmunk':
-                player = this.add.sprite(30, 465, 'chipmunk').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'cow':
-                player = this.add.sprite(30, 465, 'cow').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'dog':
-                player = this.add.sprite(30, 465, 'dog').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'poodle':
-                player = this.add.sprite(30, 465, 'poodle').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'gorilla':
-                player = this.add.sprite(30, 465, 'gorilla').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'hedgehog':
-                player = this.add.sprite(30, 465, 'hedgehog').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'honeybee':
-                player = this.add.sprite(30, 465, 'honeybee').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'monkey':
-                player = this.add.sprite(30, 465, 'monkey').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'pig':
-                player = this.add.sprite(30, 465, 'pig').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'rabbit':
-                player = this.add.sprite(30, 465, 'rabbit').setScale(0.25);
-                player.flipX = true;
-                break;
-            case 'tiger':
-                player = this.add.sprite(30, 465, 'tiger').setScale(0.25);
-                player.flipX = true;
-                break;
+            case 'chick': player = this.add.sprite(30, 465, 'chick').setScale(0.25).setFlipX(true); break;
+            case 'blackcat': player = this.add.sprite(30, 465, 'blackcat').setScale(0.25).setFlipX(true); break;
+            case 'lightcat': player = this.add.sprite(30, 465, 'lightcat').setScale(0.25).setFlipX(true); break;
+            case 'chipmunk': player = this.add.sprite(30, 465, 'chipmunk').setScale(0.25).setFlipX(true); break;
+            case 'cow': player = this.add.sprite(30, 465, 'cow').setScale(0.25).setFlipX(true); break;
+            case 'dog': player = this.add.sprite(30, 465, 'dog').setScale(0.25).setFlipX(true); break;
+            case 'poodle': player = this.add.sprite(30, 465, 'poodle').setScale(0.25).setFlipX(true); break;
+            case 'gorilla': player = this.add.sprite(30, 465, 'gorilla').setScale(0.25).setFlipX(true); break;
+            case 'hedgehog': player = this.add.sprite(30, 465, 'hedgehog').setScale(0.25).setFlipX(true); break;
+            case 'honeybee': player = this.add.sprite(30, 465, 'honeybee').setScale(0.25).setFlipX(true); break;
+            case 'monkey': player = this.add.sprite(30, 465, 'monkey').setScale(0.25).setFlipX(true); break;
+            case 'pig': player = this.add.sprite(30, 465, 'pig').setScale(0.25).setFlipX(true); break;
+            case 'rabbit': player = this.add.sprite(30, 465, 'rabbit').setScale(0.25).setFlipX(true); break;
+            case 'tiger': player = this.add.sprite(30, 465, 'tiger').setScale(0.25).setFlipX(true); break;
         }
 
         this.physics.world.enable(player);
@@ -1427,20 +1395,27 @@ class Level5 extends Phaser.Scene {
         player.body.collideWorldBounds = true;
         this.physics.add.collider(player, platforms);
         this.physics.add.collider(player, floor);
-        this.physics.add.collider(player, this.notes, this.collectNote, null, this); // Add collider for notes
-        this.physics.add.collider(player, this.obstacle, this.handleObstacleCollision, null, this); // Add collider with the obstacle
+
+        // Colliders for each obstacle
+        this.physics.add.collider(player, this.obstacles[0], (p, o) => this.handleObstacleCollision(p, o, 0), null, this);
+        this.physics.add.collider(player, this.obstacles[1], (p, o) => this.handleObstacleCollision(p, o, 1), null, this);
+        this.physics.add.collider(player, this.obstacles[2], (p, o) => this.handleObstacleCollision(p, o, 2), null, this);
+        this.physics.add.collider(player, this.obstacles[3], (p, o) => this.handleObstacleCollision(p, o, 3), null, this);
+        this.physics.add.collider(player, this.obstacles[4], (p, o) => this.handleObstacleCollision(p, o, 4), null, this);
+
+        this.physics.add.collider(player, this.notesGroup, this.collectNote, null, this); // Collider for collecting notes
+
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // Create the score text
         this.scoreText = this.add.text(16, 16, 'Score: 0', { stroke: '#000000', strokeThickness: 1.9, fontSize: '32px', fill: '#000' });
 
         this.player = player;
-
-        this.prizeSound = this.sound.add('prizeMusic'); // Create the audio object
-        this.musicPlaying = false; // Flag to track if the music is currently playing
+        this.prizeSound = this.sound.add('prizeMusic');
+        this.musicPlaying = false;
     }
 
-    placeNotesOnFloor(x, y, floorGroup) {
+    placeInitialNotesOnFloor(x, y, floorGroup) {
         const floor = floorGroup.getChildren().find(child => child.x === x && child.y === y);
         if (floor) {
             const floorWidth = floor.displayWidth;
@@ -1448,11 +1423,11 @@ class Level5 extends Phaser.Scene {
 
             const noteY = y - (floor.displayHeight / 2) - 20; // Position notes slightly above the floor
 
-            this.notes.create(x + noteSpacing * 1 - (floorWidth / 2), noteY, 'threenotes').setScale(0.15).refreshBody(); // Musical notes
-            this.notes.create(x + noteSpacing * 2 - (floorWidth / 2), noteY, 'onenote').setScale(0.15).refreshBody();   // Musical note
-            this.notes.create(x + noteSpacing * 3 - (floorWidth / 2), noteY, 'threenotes').setScale(0.15).refreshBody(); // Musical notes
+            this.notesGroup.create(x + noteSpacing * 1 - (floorWidth / 2), noteY, 'onenote').setScale(0.15).refreshBody(); // Musical notes
+            this.notesGroup.create(x + noteSpacing * 2 - (floorWidth / 2), noteY, 'onenote').setScale(0.15).refreshBody();   // Musical note
+            this.notesGroup.create(x + noteSpacing * 3 - (floorWidth / 2), noteY, 'onenote').setScale(0.15).refreshBody(); // Musical notes
 
-            this.notes.getChildren().forEach(note => {
+            this.notesGroup.getChildren().forEach(note => {
                 note.body.setAllowGravity(false); // Prevent notes from falling
                 note.body.immovable = true; // Prevent notes from being pushed by the player
             });
@@ -1460,21 +1435,32 @@ class Level5 extends Phaser.Scene {
     }
 
     collectNote(player, note) {
-        note.disableBody(true, true); // Remove the note from the physics world and hide it
-        this.score += (10) ; // Increase the score
+        note.disableBody(true, true); // Remove the note
+        this.score += 46; // Increase the score (adjust as needed)
         this.scoreText.setText('Score: ' + this.score); // Update the score text
     }
 
-    handleObstacleCollision(player, obstacle) {
-        if (this.obstacleActive) {
-            const answer = prompt("Solve for x: 4x + 3 = 19");
+    handleObstacleCollision(player, obstacle, index) {
+        if (this.obstacleActive[index]) {
+            let problem = "";
+            let correctAnswer = 0;
+
+            switch (index) {
+                case 0: problem = "Solve for x: x + 5 = 12"; correctAnswer = 7; break;
+                case 1: problem = "Solve for y: 2y - 3 = 9"; correctAnswer = 6; break;
+                case 2: problem = "Solve for a: 3a = 15"; correctAnswer = 5; break;
+                case 3: problem = "Solve for b: b / 2 = 8"; correctAnswer = 16; break;
+                case 4: problem = "Solve for z: 4z + 2 = 18"; correctAnswer = 4; break;
+            }
+
+            const answer = prompt(problem);
             if (answer !== null) {
-                const x = parseInt(answer); // parse this string and return its integer representation and save into variable x
-                if (!isNaN(x) && x === 4) { // !isNaN(x) evaluates to true if x is a valid number and false if x is NaN
-                    obstacle.disableBody(true, true); // Disappear the obstacle
-                    this.obstacleActive = false;
+                const solved = parseInt(answer) === correctAnswer;
+                if (!isNaN(parseInt(answer)) && solved) {
+                    obstacle.disableBody(true, true);
+                    this.obstacleActive[index] = false;
                 } else {
-                    alert("Sorry. The answer that you sent is wrong. Please try again.");
+                    alert("Sorry, that's incorrect. Please try again.");
                 }
             }
         }
@@ -1486,7 +1472,6 @@ class Level5 extends Phaser.Scene {
 
         player.body.velocity.x = 0;
 
-        // Handle left and right movement
         if (this.cursors.left.isDown) {
             player.body.velocity.x = -300;
             player.flipX = false;
@@ -1495,18 +1480,16 @@ class Level5 extends Phaser.Scene {
             player.flipX = true;
         }
 
-        // Handle jumping
         if (this.cursors.up.isDown && player.body.touching.down) {
-            player.body.velocity.y = -450;
+            player.body.velocity.y = -600;
         }
 
-        // "Back to Home" button
         const homeButton = this.add.image(300, 560, 'home')
             .setScale(0.50)
             .setInteractive()
             .on("pointerdown", () => {
                 if (this.musicPlaying && this.prizeSound) {
-                    this.prizeSound.stop(); // Stop the music if playing
+                    this.prizeSound.stop();
                     this.musicPlaying = false;
                 }
                 this.scene.start("HomeScene");
@@ -1542,15 +1525,15 @@ class Level5 extends Phaser.Scene {
                 break;
         }
 
-        if (this.score >= winningScore && !this.musicPlaying) { // Changed to >=
+        if (this.score >= winningScore && !this.musicPlaying) {
             alert(`You win! Here is ${musicDuration} of music.`);
             this.score = 0;
             this.prizeSound.play();
             this.musicPlaying = true;
 
             this.prizeSound.once('complete', () => {
-                alert("Click HOME & choose another level & have more fun with math & music!");
-                this.musicPlaying = false; // Reset the flag when music finishes
+                alert("Click HOME & explore more levels with math and music!");
+                this.musicPlaying = false;
             });
         }
     }
