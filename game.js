@@ -232,9 +232,6 @@ class HomeScene extends Phaser.Scene {
             circle.on('pointerdown', () => {
                 if (this.game.global.selectedCharacterKey) {
                     this.scene.start(level.key);
-                } else if (this.game.global.selectedCharacterKey === Level4) {
-                    alert("This level is special. The notes will pop up after you defeat the obstacles.");
-                    this.scene.start('Level4');
                 } else {
                     alert("Please choose a character before playing the game! Thank you.");
                 }
