@@ -232,10 +232,14 @@ class HomeScene extends Phaser.Scene {
             circle.on('pointerdown', () => {
                 if (this.game.global.selectedCharacterKey) {
                     this.scene.start(level.key);
+                } else if (this.game.global.selectedCharacterKey === Level4) {
+                    alert("This level is special. The notes will pop up after you defeat the obstacles.");
+                    this.scene.start('Level4');
                 } else {
                     alert("Please choose a character before playing the game! Thank you.");
                 }
             });
+
         });
 
         const instructionsButton = this.add.image(300, 500, 'instructions')
@@ -1009,11 +1013,11 @@ platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
         this.notesGroup = this.physics.add.group(); // Group for dynamically appearing notes
 
         // Create the 5 obstacles on the ground
-        this.obstacles[0] = this.physics.add.sprite(100, 500, 'obstacle4').setScale(0.08, 0.8).setImmovable(true);
-        this.obstacles[1] = this.physics.add.sprite(250, 500, 'obstacle4').setScale(0.08, 0.8).setImmovable(true);
-        this.obstacles[2] = this.physics.add.sprite(400, 500, 'obstacle4').setScale(0.08, 0.8).setImmovable(true);
-        this.obstacles[3] = this.physics.add.sprite(550, 500, 'obstacle4').setScale(0.08, 0.8).setImmovable(true);
-        this.obstacles[4] = this.physics.add.sprite(700, 500, 'obstacle4').setScale(0.08, 0.8).setImmovable(true);
+        this.obstacles[0] = this.physics.add.sprite(100, 275, 'obstacle4').setScale(0.03, 0.78).setImmovable(true);
+        this.obstacles[1] = this.physics.add.sprite(250, 275, 'obstacle4').setScale(0.03, 0.78).setImmovable(true);
+        this.obstacles[2] = this.physics.add.sprite(400, 275, 'obstacle4').setScale(0.03, 0.78).setImmovable(true);
+        this.obstacles[3] = this.physics.add.sprite(550, 275, 'obstacle4').setScale(0.03, 0.78).setImmovable(true);
+        this.obstacles[4] = this.physics.add.sprite(700, 275, 'obstacle4').setScale(0.03, 0.78).setImmovable(true);
 
         const chosenAnimalKey = this.game.global.selectedCharacterKey;
         let player;
@@ -1092,11 +1096,13 @@ platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
 
     collectNote(player, note) {
         note.disableBody(true, true);
-        this.score += 20; // Adjust the score increment as needed
+        this.score += 100; // Adjust the score increment as needed
         this.scoreText.setText('Score: ' + this.score);
     }
 
     update() {
+        alert("This level is special. The notes will pop up after you defeat the obstacles.");
+
         const player = this.player;
         if (!player) return;
 
@@ -1111,7 +1117,7 @@ platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
         }
 
         if (this.cursors.up.isDown && player.body.touching.down) {
-            player.body.velocity.y = -450;
+            player.body.velocity.y = -600;
         }
 
         const homeButton = this.add.image(300, 560, 'home')
@@ -1125,11 +1131,38 @@ platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
                 this.scene.start("HomeScene");
             });
 
-        const winningScore = 100; // Adjust the winning score as needed
-        const musicDuration = 'a synth-pop melody'; // Specific to the music file
+        let winningScore;
+        let musicDuration;
+
+        switch (this.scene.key) {
+            case 'Level1':
+                winningScore = 100;
+                musicDuration = 'one minute';
+                break;
+            case 'Level2':
+                winningScore = 200;
+                musicDuration = '30 seconds';
+                break;
+            case 'Level3':
+                winningScore = 300;
+                musicDuration = '33 seconds';
+                break;
+            case 'Level4':
+                winningScore = 400;
+                musicDuration = '1 minute and 23 seconds';
+                break;
+            case 'Level5':
+                winningScore = 500;
+                musicDuration = '1 minute and 13 seconds';
+                break;
+            default:
+                winningScore = 100;
+                musicDuration = 'some time';
+                break;
+        }
 
         if (this.score >= winningScore && !this.musicPlaying) {
-            alert(`You reached a score of ${winningScore}! Enjoy ${musicDuration}.`);
+            alert(`You win! Here is ${musicDuration} of music.`);
             this.score = 0;
             this.prizeSound.play();
             this.musicPlaying = true;
