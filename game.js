@@ -1098,8 +1098,6 @@ platforms.create(90,547,'ground').setScale(0.5,0.75).refreshBody();
     }
 
     update() {
-        alert("This level is special. The notes will pop up after you defeat the obstacles.");
-
         const player = this.player;
         if (!player) return;
 
